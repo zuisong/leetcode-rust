@@ -6,6 +6,7 @@ use log::*;
 struct Solution {}
 
 impl Solution {
+    #[inline]
     fn get_row_col(n: usize) -> (usize, usize) {
         let row = n / 9;
         let col = n % 9;
@@ -13,11 +14,11 @@ impl Solution {
     }
 
     fn check_num(c: char, n: usize, board: &mut Vec<Vec<char>>) -> bool {
-        Solution::check_row_col(c, n, board) && Solution::check_grid(c, n, board)
+        Self::check_row_col(c, n, board) && Self::check_grid(c, n, board)
     }
 
     fn check_row_col(c: char, n: usize, board: &mut Vec<Vec<char>>) -> bool {
-        let (row, col) = Solution::get_row_col(n);
+        let (row, col) = Self::get_row_col(n);
 
         for i in 0..9 {
             if board[row][i] == c || board[i][col] == c {
@@ -44,16 +45,16 @@ impl Solution {
             return true;
         }
 
-        let (row, col) = Solution::get_row_col(n);
+        let (row, col) = Self::get_row_col(n);
 
         if board[row][col] != '.' {
-            return Solution::dfs(n + 1, board);
+            return Self::dfs(n + 1, board);
         }
 
         for c in ['1', '2', '3', '4', '5', '6', '7', '8', '9'].iter() {
-            if Solution::check_num(*c, n, board) {
+            if Self::check_num(*c, n, board) {
                 board[row][col] = *c;
-                let res = Solution::dfs(n, board);
+                let res = Self::dfs(n, board);
                 if !res {
                     board[row][col] = '.';
                 } else {
@@ -66,7 +67,7 @@ impl Solution {
     }
 
     pub fn solve_sudoku(board: &mut Vec<Vec<char>>) {
-        Solution::dfs(0, board);
+        Self::dfs(0, board);
     }
 }
 
@@ -82,9 +83,8 @@ fn main() {
         vec!['7', '.', '.', '.', '2', '.', '.', '.', '6'],
         vec!['.', '6', '.', '.', '.', '.', '2', '8', '.'],
         vec!['.', '.', '.', '4', '1', '9', '.', '.', '5'],
-        vec!['.', '.', '.', '.', '8', '.', '.', '7', '9']
-    ]
-        ;
+        vec!['.', '.', '.', '.', '8', '.', '.', '7', '9'],
+    ];
     board.iter().for_each(|line| info!("{:?}", line));
     info!("===");
     Solution::solve_sudoku(&mut board);

@@ -19,9 +19,8 @@ impl Solution {
     }
 }
 
-
 fn main() {
-    let nums = vec!(1, 2, 3, 1);
+    let nums = vec![1, 2, 3, 1];
     let k = 3;
     let t = 0;
 

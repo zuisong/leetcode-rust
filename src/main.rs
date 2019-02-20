@@ -26,6 +26,5 @@ fn f1() -> Box<Fn(i32) -> i32> {
     });
     println!("{}", s);
 
-
     return x1;
 }

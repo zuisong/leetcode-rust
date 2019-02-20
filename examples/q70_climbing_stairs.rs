@@ -38,7 +38,6 @@ impl Solution {
     }
 }
 
-
 fn main() {
     let d = Solution::climb_stairs(70);
     println!("{}", d);

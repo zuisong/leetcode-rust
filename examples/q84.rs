@@ -3,12 +3,7 @@
 //
 // 求在该柱状图中，能够勾勒出来的矩形的最大面积。
 
-
-
-
-
 pub struct Solution {}
-
 
 impl Solution {
     pub fn largest_rectangle_area(heights: Vec<i32>) -> i32 {
@@ -22,16 +17,18 @@ impl Solution {
                 while stack.last().unwrap_or(&0) > &height {
                     i += 1;
                     result = result.max(stack.pop().unwrap() * i);
-                };
-                for _ in 0..=i { stack.push(height) }
+                }
+                for _ in 0..=i {
+                    stack.push(height)
+                }
             } else {
                 stack.push(height);
             };
-        };
-        result = stack.iter()
+        }
+        result = stack
+            .iter()
             .enumerate()
             .fold(result, |a, (idx, v)| a.max(v * (stack.len() - idx) as i32));
-
 
         return result;
     }

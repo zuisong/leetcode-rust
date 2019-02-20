@@ -1,34 +1,35 @@
 #![feature(test)]
 #![allow(unused_imports)]
 
-extern crate test;
 extern crate log;
 extern crate simple_logger;
+extern crate test;
 
 use log::*;
 
 struct Solution {}
-
 
 const EMPTY_GRID: &str = "+ ";
 const QUEEN_GRID: &str = "Q ";
 
 impl Solution {
     pub fn dfs(v: &mut Vec<i32>, layer: i32, result: &mut Vec<Vec<String>>) {
-//        if result.len() > 0 {
-//            return;
-//        }
+        //        if result.len() > 0 {
+        //            return;
+        //        }
 
         let n = v.len() as i32;
         if layer == n {
-//            println!("{:?}", v);
+            //            println!("{:?}", v);
 
-            let res: Vec<String> = v.iter().map(|it| {
-                let mut s = vec![EMPTY_GRID; n as usize];
-                s[*it as usize] = QUEEN_GRID;
-                s.join("")
-            }).collect();
-
+            let res: Vec<String> = v
+                .iter()
+                .map(|it| {
+                    let mut s = vec![EMPTY_GRID; n as usize];
+                    s[*it as usize] = QUEEN_GRID;
+                    s.join("")
+                })
+                .collect();
 
             result.push(res);
             return;
@@ -41,7 +42,7 @@ impl Solution {
                     b = true;
                     break;
                 }
-            };
+            }
             if !b {
                 v[layer as usize] = num;
                 Solution::dfs(v, layer + 1, result);
@@ -57,7 +58,6 @@ impl Solution {
     }
 }
 
-
 fn main() {
     simple_logger::init().unwrap();
     let result = Solution::solve_n_queens(7);
@@ -69,6 +69,6 @@ fn main() {
 
         for r in res {
             info!("{}", r);
-        };
+        }
     }
 }

@@ -35,7 +35,6 @@ impl Solution {
         let mut y_s: usize = 0;
         let mut y_e: usize = matrix.first().unwrap().len() - 1;
 
-
         let mut direction = 1;
 
         while x_s <= x_e && y_s <= y_e {
@@ -52,7 +51,9 @@ impl Solution {
                         result.push(matrix[idx][y_e])
                     }
                     direction += 1;
-                    if y_e == 0 { break; }
+                    if y_e == 0 {
+                        break;
+                    }
                     y_e -= 1;
                 }
                 3 => {
@@ -80,20 +81,10 @@ impl Solution {
 
 #[warn(allow_variables)]
 fn main() {
-    let matrix: Vec<Vec<i32>> = vec![
-        vec![1, 2, 3],
-        vec![4, 5, 6],
-        vec![7, 8, 9]
-    ];
+    let matrix: Vec<Vec<i32>> = vec![vec![1, 2, 3], vec![4, 5, 6], vec![7, 8, 9]];
 
-    let matrix2: Vec<Vec<i32>> = vec![
-        vec![1],
-        vec![5],
-        vec![9]
-    ];
-
+    let matrix2: Vec<Vec<i32>> = vec![vec![1], vec![5], vec![9]];
 
     let res = Solution::spiral_order(matrix);
     println!("{:?}", res)
 }
-

@@ -6,11 +6,8 @@ impl Solution {
             return;
         }
 
-        let x0 = matrix.first().unwrap().iter()
-            .any(|it| *it == 0);
-        let y0 = matrix.iter()
-            .map(|it| it[0])
-            .any(|it| it == 0);
+        let x0 = matrix.first().unwrap().iter().any(|it| *it == 0);
+        let y0 = matrix.iter().map(|it| it[0]).any(|it| it == 0);
 
         let len_x = matrix.len();
         let len_y = matrix.first().unwrap().len();
@@ -46,11 +43,7 @@ impl Solution {
 }
 
 fn main() {
-    let mut matrix: Vec<Vec<i32>> = vec![
-        vec![1, 2, 3],
-        vec![0, 0, 6],
-        vec![7, 8, 9]
-    ];
+    let mut matrix: Vec<Vec<i32>> = vec![vec![1, 2, 3], vec![0, 0, 6], vec![7, 8, 9]];
     Solution::set_zeroes(&mut matrix);
 
     matrix.iter().for_each(|it| {

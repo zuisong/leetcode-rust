@@ -79,10 +79,12 @@ impl Solution {
 }
 
 fn main() {
-    let res = Solution::generate_matrix(30);
+    let res = Solution::generate_matrix(10);
+
+    //    dbg!(&res);
 
     res.iter().for_each(|r| {
-        r.iter().for_each(|x| print!("{: >4}|", x));
+        r.iter().for_each(|x| print!("{: >5}", x));
         println!();
     });
 }

@@ -30,6 +30,6 @@ impl Solution {
 struct Solution {}
 
 fn main() {
-    let res = Solution::max_area(vec![1, 2, 3, 4, 5, 6]);
+    let res = Solution::max_area(vec![1, 8, 6, 2, 5, 4, 8, 3, 7]);
     println!("{}", res);
 }

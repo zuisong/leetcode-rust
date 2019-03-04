@@ -1,11 +1,8 @@
-#![feature(test)]
-#![allow(unused_imports)]
-
 extern crate log;
 extern crate simple_logger;
-extern crate test;
 
 use log::*;
+use std::process::exit;
 
 struct Solution {}
 
@@ -17,21 +14,27 @@ impl Solution {
         //        if result.len() > 0 {
         //            return;
         //        }
+        info!("{:?}", v);
 
         let n = v.len() as i32;
         if layer == n {
-            //            println!("{:?}", v);
+//                        println!("{:?}", v);
 
             let res: Vec<String> = v
                 .iter()
                 .map(|it| {
                     let mut s = vec![EMPTY_GRID; n as usize];
                     s[*it as usize] = QUEEN_GRID;
-                    s.join("")
+
+                    let s = s.join("");
+                    info!("{}", s);
+                    s
                 })
                 .collect();
 
             result.push(res);
+            exit(0);
+
             return;
         }
 
@@ -46,6 +49,7 @@ impl Solution {
             if !b {
                 v[layer as usize] = num;
                 Solution::dfs(v, layer + 1, result);
+                v[layer as usize] = -1;
             }
         }
     }
@@ -60,7 +64,7 @@ impl Solution {
 
 fn main() {
     simple_logger::init().unwrap();
-    let result = Solution::solve_n_queens(7);
+    let result = Solution::solve_n_queens(31);
 
     info!("{}", result.len());
 

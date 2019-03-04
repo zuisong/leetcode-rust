@@ -28,10 +28,14 @@ impl Solution {
     pub fn climb_stairs(n: i32) -> u64 {
         let mut a = 0;
         let mut res = 1;
-        for _ in 1..=n {
+        for i in 1..=n {
             let temp = res;
             res += a;
             a = temp;
+
+            dbg!(&i);
+            dbg!(&res);
+            dbg!(&a);
         }
 
         return res;
@@ -39,6 +43,6 @@ impl Solution {
 }
 
 fn main() {
-    let d = Solution::climb_stairs(70);
+    let d = Solution::climb_stairs(10);
     println!("{}", d);
 }

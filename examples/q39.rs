@@ -19,7 +19,7 @@
  *
  *
  * 所有数字（包括 target）都是正整数。
- * 解集不能包含重复的组合。 
+ * 解集不能包含重复的组合。
  *
  *
  * 示例 1:
@@ -51,7 +51,9 @@ impl Solution {
     }
 
     fn dfs(target: i32, idx: usize, temp: &mut Vec<i32>, nums: &Vec<i32>, res: &mut Vec<Vec<i32>>) {
-        if target < 0 { return; }
+        if target < 0 {
+            return;
+        }
 
         if target == 0 {
             res.push(temp.clone());
@@ -73,8 +75,6 @@ fn main() {
     let res = Solution::combination_sum(vec![2, 3, 4, 5, 6], 8);
 
     println!("{:?}", res);
-
-
 }
 
 struct Solution {}

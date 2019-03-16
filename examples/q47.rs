@@ -30,25 +30,18 @@ impl Solution {
         let new_nums: Vec<usize> = (0..nums.len()).collect();
         let mut res = vec![];
         Self::dfs(&mut res, &mut vec![], &new_nums);
-        let mut res: Vec<Vec<i32>> = res.iter()
-            .map(|it| {
-                let s: Vec<i32> =
-                    (*it).iter().map(|idx| nums[*idx]).collect();
-                s
-            }).collect();
+        let mut res: Vec<Vec<_>> = res
+            .iter()
+            .map(|it| (*it).iter().map(|idx| nums[*idx]).collect())
+            .collect();
         res.sort();
         res.dedup_by(|it1, it2| {
-            it1.len() == it2.len() &&
-                it1.iter().enumerate().all(|(i, val)| *val == it2[i])
+            it1.len() == it2.len() && it1.iter().enumerate().all(|(i, val)| *val == it2[i])
         });
         res
     }
 
-    fn dfs(
-        res: &mut Vec<Vec<usize>>,
-        temp: &mut Vec<usize>,
-        nums: &Vec<usize>,
-    ) {
+    fn dfs(res: &mut Vec<Vec<usize>>, temp: &mut Vec<usize>, nums: &Vec<usize>) {
         if temp.len() == nums.len() {
             res.push(temp.clone());
             return;

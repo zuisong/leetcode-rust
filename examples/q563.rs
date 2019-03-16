@@ -59,8 +59,8 @@ impl TreeNode {
     }
 }
 
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 
 impl Solution {
     pub fn find_tilt(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
@@ -68,16 +68,18 @@ impl Solution {
         t.1
     }
 
-
     fn v_node(node: &Option<Rc<RefCell<TreeNode>>>) -> (i32, i32) {
         match node {
             Some(node) => {
                 let x = node.borrow();
                 let (l_sum, l_tilt) = Self::v_node(&x.left);
                 let (r_sum, r_tilt) = Self::v_node(&x.right);
-                (l_sum + r_sum + x.val, l_tilt + r_tilt + (l_sum - r_sum).abs())
+                (
+                    l_sum + r_sum + x.val,
+                    l_tilt + r_tilt + (l_sum - r_sum).abs(),
+                )
             }
-            _ => (0, 0)
+            _ => (0, 0),
         }
     }
 }
@@ -85,4 +87,3 @@ impl Solution {
 struct Solution {}
 
 fn main() {}
-

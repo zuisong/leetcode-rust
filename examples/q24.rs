@@ -23,7 +23,7 @@
  *
  *
  */
-use std::mem::{swap, replace};
+use std::mem::{replace, swap};
 
 // Definition for singly-linked list.
 #[derive(PartialEq, Eq, Debug)]
@@ -35,10 +35,7 @@ pub struct ListNode {
 impl ListNode {
     #[inline]
     fn new(val: i32) -> Self {
-        ListNode {
-            next: None,
-            val,
-        }
+        ListNode { next: None, val }
     }
 }
 
@@ -69,7 +66,6 @@ impl Solution {
     }
 }
 
-
 fn main() {
     let mut l1 = ListNode::new(1);
     let mut l2 = ListNode::new(2);
@@ -86,6 +82,5 @@ fn main() {
     let n = Solution::swap_pairs(Some(Box::new(l1)));
     dbg!(n);
 }
-
 
 struct Solution {}

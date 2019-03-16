@@ -37,31 +37,32 @@
 impl Solution {
     pub fn search(nums: Vec<i32>, target: i32) -> i32 {
         fn s(nums: &Vec<i32>, target: &i32, left: usize, right: usize) -> i32 {
-            if *target == nums[left] {
-                return left as i32;
+            if left > right {
+                return -1;
             }
-
-            if *target == nums[right] {
-                return right as i32;
-            }
-            if left >= right { return -1; }
 
             let mid = (left + right) / 2;
-            if nums[mid] == *target { return mid as i32; };
-            if nums[left] < nums[mid] {
-                if *target < nums[mid] && *target > nums[left] {
-                    if mid == 0 { return -1; }
-                    return s(nums, target, left + 1, mid - 1);
+            if nums[mid] == *target {
+                return mid as i32;
+            }
+            if nums[left] <= nums[mid] {
+                if *target < nums[mid] && *target >= nums[left] {
+                    if mid == 0 {
+                        return -1;
+                    }
+                    return s(nums, target, left, mid - 1);
                 } else {
-                    return s(nums, target, mid + 1, right - 1);
-                };
+                    return s(nums, target, mid + 1, right);
+                }
             } else {
-                if *target > nums[mid] && *target < nums[right] {
+                if *target > nums[mid] && *target <= nums[right] {
                     return s(nums, target, mid + 1, right);
                 } else {
-                    if mid == 0 { return -1; }
-                    return s(nums, target, left + 1, mid);
-                };
+                    if mid == 0 {
+                        return -1;
+                    }
+                    return s(nums, target, left, mid - 1);
+                }
             }
         }
         if nums.is_empty() {

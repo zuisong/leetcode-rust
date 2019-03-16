@@ -56,9 +56,9 @@ impl TreeNode {
     }
 }
 
-use std::rc::Rc;
 use std::cell::RefCell;
 use std::mem::swap;
+use std::rc::Rc;
 
 impl Solution {
     pub fn invert_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
@@ -77,7 +77,6 @@ impl Solution {
         };
     }
 }
-
 
 fn main() {
     let mut root = TreeNode::new(10);

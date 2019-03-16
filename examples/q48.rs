@@ -76,16 +76,13 @@ impl Solution {
 }
 
 fn main() {
-    let mut v =
-        vec![
-            vec![5, 1, 9, 11],
-            vec![2, 4, 8, 10],
-            vec![13, 3, 6, 7],
-            vec![15, 14, 12, 16]
-        ];
+    let mut v = vec![
+        vec![5, 1, 9, 11],
+        vec![2, 4, 8, 10],
+        vec![13, 3, 6, 7],
+        vec![15, 14, 12, 16],
+    ];
     Solution::rotate(&mut v);
 
     println!("{:?}", v);
 }
-
-

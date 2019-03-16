@@ -39,9 +39,7 @@ impl Solution {
 
         for s in strs {
             let mut s1 = s.clone();
-            let x = unsafe {
-                s1.as_bytes_mut()
-            };
+            let x = unsafe { s1.as_bytes_mut() };
 
             x.sort();
             let x = String::from_utf8_lossy(x).to_string();
@@ -60,8 +58,10 @@ impl Solution {
 }
 
 fn main() {
-   let v : Vec<String>=  vec!["eat", "tea", "tan", "ate", "nat", "bat"]
-        .iter().map(|it| it.to_string()).collect();
+    let v: Vec<String> = vec!["eat", "tea", "tan", "ate", "nat", "bat"]
+        .iter()
+        .map(|it| it.to_string())
+        .collect();
 
     let res = Solution::group_anagrams(v);
 

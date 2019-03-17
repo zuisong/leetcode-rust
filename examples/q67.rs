@@ -30,17 +30,14 @@ use std::collections::vec_deque::VecDeque;
 
 impl Solution {
     pub fn add_binary(a: String, b: String) -> String {
+        let num1: Vec<char> = a.chars().collect();
+        let num2: Vec<char> = b.chars().collect();
 
-        let num1: VecDeque<u8> = a.chars().map(|c| c.to_string().parse().unwrap()).collect();
-        let num2: VecDeque<u8> = b.chars().map(|c| c.to_string().parse().unwrap()).collect();
-
-        add(&num1, &num2)
-            .iter().map(|it| it.to_string()).collect()
+        add(&num1, &num2).iter().collect()
     }
 }
 
-/// 两个大数相加  [1,2,4] + [4,8] = [1,7,2]
-fn add(num1: &VecDeque<u8>, num2: &VecDeque<u8>) -> VecDeque<u8> {
+fn add(num1: &Vec<char>, num2: &Vec<char>) -> VecDeque<char> {
     if num1.len() < num2.len() {
         return add(num2, num1);
     }
@@ -48,18 +45,25 @@ fn add(num1: &VecDeque<u8>, num2: &VecDeque<u8>) -> VecDeque<u8> {
 
     let mut res = VecDeque::new();// 保存结果
 
-    let mut flag = 0; // 进位标识
-    for i in 0..num2.len() {
-        let t = num1[l1 - i] + num2[l2 - i] + flag;
-        res.push_front(t % 2);
-        flag = t / 2;
+    let mut flag = '0'; // 进位标识
+    for i in 0..num1.len() {
+        let n2 = if i > l2 { '0' } else { num2[l2 - i] };
+        let t = [num1[l1 - i], n2, flag]
+            .iter().filter(|c| **c == '1').count();
+        if t == 1 || t == 3 {
+            res.push_front('1');
+        } else {
+            res.push_front('0')
+        }
+
+        if t == 2 || t == 3 {
+            flag = '1'
+        } else {
+            flag = '0';
+        }
     }
-    for i in num2.len()..num1.len() {
-        let t = num1[l1 - i] + flag;
-        res.push_front(t % 2);
-        flag = t / 2;
-    }
-    if flag != 0 {
+
+    if flag != '0' {
         res.push_front(flag);
     }
     res

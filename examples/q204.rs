@@ -24,31 +24,34 @@
 
 impl Solution {
     pub fn count_primes(n: i32) -> i32 {
-        if n < 2 {
+        let n = n as usize;
+        if n <= 2 {
             return 0;
         }
 
-        let mut ve = vec![0; n as usize];
-        ve[0] = -1;
-        ve[1] = -1;
-        let mut result = 0;
+        let mut ve = vec![true; n];
+        ve[0] = false;
+        ve[1] = false;
+        let mut result = 1;
 
-        for i in 2..n as usize {
-            if ve[i] == 0 {
+        for i in (3..n).step_by(2) {
+            if ve[i] {
                 result += 1;
+                //                dbg!(&i);
                 let mut num: usize = i as usize;
-                while num < n as usize {
-                    ve[num] = -1;
+                while num < n {
+                    ve[num] = false;
                     num += i;
                 }
             }
         }
+
         result
     }
 }
 
 fn main() {
-    let s = Solution::count_primes(100);
+    let s = Solution::count_primes(1_000_000);
     println!("{:?}", s);
 }
 

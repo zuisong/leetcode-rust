@@ -77,8 +77,12 @@
 
 impl Solution {
     pub fn compress(chars: &mut Vec<char>) -> i32 {
-        if chars.is_empty() { return 0; }
-        if chars.len() == 1 { return 1; }
+        if chars.is_empty() {
+            return 0;
+        }
+        if chars.len() == 1 {
+            return 1;
+        }
         let mut write_idx = 0;
         let mut pre_char = chars[0];
         let mut count = 1;

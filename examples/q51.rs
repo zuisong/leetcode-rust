@@ -55,7 +55,7 @@ impl Solution {
         //        if result.len() > 0 {  // 找到一个就结束
         //            return;
         //        }
-//        info!("{:?}", v);
+        //        info!("{:?}", v);
 
         let n = v.len() as i32;
         if layer == n {
@@ -66,7 +66,7 @@ impl Solution {
                     s[*it as usize] = QUEEN_GRID;
 
                     let s = s.join("");
-//                    info!("{}", s);
+                    //                    info!("{}", s);
                     s
                 })
                 .collect();

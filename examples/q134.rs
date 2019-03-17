@@ -73,7 +73,6 @@ impl Solution {
         }
         dbg!(&v);
 
-
         if len == 1 {
             return 0;
         }
@@ -108,7 +107,7 @@ impl Solution {
 }
 
 fn main() {
-//    [5,1,2,3,4]\n[4,4,1,5,1]'
+    //    [5,1,2,3,4]\n[4,4,1,5,1]'
     let gas = vec![5, 1, 2, 3, 4];
     let cost = vec![4, 4, 1, 5, 1];
 

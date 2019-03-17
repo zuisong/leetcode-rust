@@ -43,13 +43,15 @@ fn add(num1: &Vec<char>, num2: &Vec<char>) -> VecDeque<char> {
     }
     let (l1, l2) = (num1.len() - 1, num2.len() - 1);
 
-    let mut res = VecDeque::new();// 保存结果
+    let mut res = VecDeque::new(); // 保存结果
 
     let mut flag = '0'; // 进位标识
     for i in 0..num1.len() {
         let n2 = if i > l2 { '0' } else { num2[l2 - i] };
         let t = [num1[l1 - i], n2, flag]
-            .iter().filter(|c| **c == '1').count();
+            .iter()
+            .filter(|c| **c == '1')
+            .count();
         if t == 1 || t == 3 {
             res.push_front('1');
         } else {
@@ -68,7 +70,6 @@ fn add(num1: &Vec<char>, num2: &Vec<char>) -> VecDeque<char> {
     }
     res
 }
-
 
 fn main() {
     let num1: u64 = 101101;

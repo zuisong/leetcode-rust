@@ -32,15 +32,12 @@ impl Solution {
         let x2 = c.min(g);
         let y2 = d.min(h);
 
-
         let temp = if x1 >= x2 || y1 >= y2 {
             0
         } else {
             (x2 - x1) * (y2 - y1)
         };
 
-
         (c - a) * (d - b) + (g - e) * (h - f) - temp
     }
 }
-

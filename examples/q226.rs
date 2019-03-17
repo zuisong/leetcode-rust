@@ -38,8 +38,8 @@
  *
  */
 use std::cell::RefCell;
-use std::rc::Rc;
 use std::mem::replace;
+use std::rc::Rc;
 
 // Definition for a binary tree node.
 #[derive(Debug, PartialEq, Eq)]

@@ -31,7 +31,9 @@ use std::collections::HashMap;
 
 impl Solution {
     pub fn letter_combinations(digits: String) -> Vec<String> {
-        if digits.is_empty() {return vec![];}
+        if digits.is_empty() {
+            return vec![];
+        }
         let v: Vec<_> = digits.chars().collect();
         let mut res: Vec<String> = vec![];
 
@@ -49,8 +51,12 @@ impl Solution {
     }
 }
 
-
-fn dfs(res: &mut Vec<String>, temp: &mut Vec<u8>, digits: &Vec<char>, map: &HashMap<char, Vec<u8>>) {
+fn dfs(
+    res: &mut Vec<String>,
+    temp: &mut Vec<u8>,
+    digits: &Vec<char>,
+    map: &HashMap<char, Vec<u8>>,
+) {
     if temp.len() == digits.len() {
         let s = String::from_utf8(temp.clone()).unwrap();
         res.push(s);

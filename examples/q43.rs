@@ -37,11 +37,19 @@ use std::collections::vec_deque::VecDeque;
 
 impl Solution {
     pub fn multiply(num1: String, num2: String) -> String {
-        let num1: VecDeque<u8> = num1.chars().map(|c| c.to_string().parse().unwrap()).collect();
-        let num2: VecDeque<u8> = num2.chars().map(|c| c.to_string().parse().unwrap()).collect();
+        let num1: VecDeque<u8> = num1
+            .chars()
+            .map(|c| c.to_string().parse().unwrap())
+            .collect();
+        let num2: VecDeque<u8> = num2
+            .chars()
+            .map(|c| c.to_string().parse().unwrap())
+            .collect();
 
         multiply(num1, num2)
-            .iter().map(|it| it.to_string()).collect()
+            .iter()
+            .map(|it| it.to_string())
+            .collect()
     }
 }
 
@@ -88,7 +96,7 @@ fn add(num1: &VecDeque<u8>, num2: &VecDeque<u8>) -> VecDeque<u8> {
     }
     let (l1, l2) = (num1.len() - 1, num2.len() - 1);
 
-    let mut res = VecDeque::new();// 保存结果
+    let mut res = VecDeque::new(); // 保存结果
 
     let mut flag = 0; // 进位标识
     for i in 0..num2.len() {
@@ -122,14 +130,20 @@ mod test {
     fn test1() {
         let num1: u64 = 1122222;
         let num2: u64 = 0;
-        assert_eq!(0.to_string(), Solution::multiply(num1.to_string(), num2.to_string()))
+        assert_eq!(
+            0.to_string(),
+            Solution::multiply(num1.to_string(), num2.to_string())
+        )
     }
 
     #[test]
     fn test2() {
         let num1: u64 = 1122222;
         let num2: u64 = 454654;
-        assert_eq!((num1 * num2).to_string(), Solution::multiply(num1.to_string(), num2.to_string()))
+        assert_eq!(
+            (num1 * num2).to_string(),
+            Solution::multiply(num1.to_string(), num2.to_string())
+        )
     }
 
     #[test]
@@ -137,7 +151,10 @@ mod test {
     fn test3() {
         let num1: u64 = 1122222;
         let num2: u64 = 454654;
-        assert_eq!(("0").to_string(), Solution::multiply(num1.to_string(), num2.to_string()))
+        assert_eq!(
+            ("0").to_string(),
+            Solution::multiply(num1.to_string(), num2.to_string())
+        )
     }
 }
 

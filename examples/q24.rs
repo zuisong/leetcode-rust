@@ -23,7 +23,7 @@
  *
  *
  */
-use std::mem::{replace, swap};
+use std::mem::replace;
 
 // Definition for singly-linked list.
 #[derive(PartialEq, Eq, Debug)]
@@ -41,28 +41,23 @@ impl ListNode {
 
 impl Solution {
     pub fn swap_pairs(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        let mut head = head;
         fn swap_p(mut node: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
             if node.is_some() && node.as_ref().unwrap().next.is_some() {
-                let pt1 = &mut node as *mut Option<Box<ListNode>>;
-                let n1 = unsafe { &mut *pt1 };
+                let n1 = &mut node;
                 let n2 = &mut n1.as_mut().unwrap().next;
-
-                let mut n3 = replace(&mut (*n2).as_mut().unwrap().next, node);
-
+                let n3 = replace(&mut n2.as_mut().unwrap().next, None);
                 let new_n3 = swap_p(n3);
 
-                let mut n2 = replace(&mut *n2, None);
-
-                (*n1).as_mut().unwrap().next = new_n3;
-
-                n2
+                let mut new_n1 = replace(&mut *n2, None);
+                let mut new_n2 = replace(&mut *n1, None);
+                new_n2.as_mut().unwrap().next = new_n3;
+                new_n1.as_mut().unwrap().next = new_n2;
+                new_n1
             } else {
                 node
             }
         }
-        let head = swap_p(head);
-        head
+        return swap_p(head);
     }
 }
 
@@ -72,7 +67,7 @@ fn main() {
     let mut l3 = ListNode::new(3);
     let mut l4 = ListNode::new(4);
     let mut l5 = ListNode::new(5);
-    let mut l6 = ListNode::new(6);
+    let l6 = ListNode::new(6);
     l5.next = Some(Box::new(l6));
     l4.next = Some(Box::new(l5));
     l3.next = Some(Box::new(l4));

@@ -83,6 +83,5 @@ fn main() {
         vec![15, 14, 12, 16],
     ];
     Solution::rotate(&mut v);
-
-    println!("{:?}", v);
+    v.iter().for_each(|v| println!("{:?}", v));
 }

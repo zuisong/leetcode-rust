@@ -37,6 +37,10 @@
  * 谷歌：我们90％的工程师使用您编写的软件(Homebrew)，但是您却无法在面试时在白板上写出翻转二叉树这道题，这太糟糕了。
  *
  */
+use std::cell::RefCell;
+use std::rc::Rc;
+use std::mem::replace;
+
 // Definition for a binary tree node.
 #[derive(Debug, PartialEq, Eq)]
 pub struct TreeNode {
@@ -56,24 +60,21 @@ impl TreeNode {
     }
 }
 
-use std::cell::RefCell;
-use std::mem::swap;
-use std::rc::Rc;
-
 impl Solution {
     pub fn invert_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
-        Self::invert_tree1(&root);
+        let mut root = root;
+        Self::invert_tree1(&mut root);
         root
     }
 
-    fn invert_tree1(node: &Option<Rc<RefCell<TreeNode>>>) {
+    fn invert_tree1(node: &mut Option<Rc<RefCell<TreeNode>>>) {
         if let Some(node) = node {
-            let p = node.as_ptr();
-            unsafe {
-                swap(&mut (*p).left, &mut (*p).right);
-            }
-            Self::invert_tree1(&node.clone().borrow().left);
-            Self::invert_tree1(&node.clone().borrow().right);
+            let mut left = replace(&mut node.borrow_mut().left, None);
+            let mut right = replace(&mut node.borrow_mut().right, None);
+            Self::invert_tree1(&mut left);
+            Self::invert_tree1(&mut right);
+            node.borrow_mut().left = left;
+            node.borrow_mut().right = right;
         };
     }
 }

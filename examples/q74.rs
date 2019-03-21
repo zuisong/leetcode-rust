@@ -44,7 +44,7 @@
  */
 impl Solution {
     pub fn search_matrix(matrix: Vec<Vec<i32>>, target: i32) -> bool {
-        if matrix.is_empty()||matrix[0].is_empty() {
+        if matrix.is_empty() || matrix[0].is_empty() {
             return false;
         }
         let len_x = matrix.len();

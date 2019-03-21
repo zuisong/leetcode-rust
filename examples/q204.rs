@@ -51,8 +51,11 @@ impl Solution {
 }
 
 fn main() {
-    let s = Solution::count_primes(1_000_000);
+    let start = std::time::Instant::now();
+    let s = Solution::count_primes(100_000_000);
+    let end = std::time::Instant::now();
     println!("{:?}", s);
+    println!("{:?}", end - start);
 }
 
 struct Solution {}

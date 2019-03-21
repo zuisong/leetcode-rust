@@ -1,4 +1,4 @@
-/*
+/**
  * @lc app=leetcode.cn id=40 lang=rust
  *
  * [40] 组合总和 II

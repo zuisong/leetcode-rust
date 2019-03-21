@@ -73,8 +73,8 @@ impl Solution {
             let mut right = replace(&mut node.borrow_mut().right, None);
             Self::invert_tree1(&mut left);
             Self::invert_tree1(&mut right);
-            node.borrow_mut().left = left;
-            node.borrow_mut().right = right;
+            node.borrow_mut().left = right;
+            node.borrow_mut().right = left;
         };
     }
 }

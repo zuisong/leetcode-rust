@@ -87,6 +87,9 @@ fn main() {
     ];
     board.iter().for_each(|line| info!("{:?}", line));
     info!("===");
+    let s = std::time::Instant::now();
     Solution::solve_sudoku(&mut board);
+    let e = std::time::Instant::now();
+    info!("{:?}", e - s);
     board.iter().for_each(|line| info!("{:?}", line));
 }

@@ -37,10 +37,12 @@
  */
 impl Solution {
     pub fn str_str(haystack: String, needle: String) -> i32 {
-//        haystack.as_str()
-//            .find(needle.as_str())
-//            .map(|it| it as i32).unwrap_or(-1)
-        if needle.is_empty() { return 0; }
+        //        haystack.as_str()
+        //            .find(needle.as_str())
+        //            .map(|it| it as i32).unwrap_or(-1)
+        if needle.is_empty() {
+            return 0;
+        }
         let p: Vec<_> = needle.chars().collect();
         let s: Vec<_> = haystack.chars().collect();
 
@@ -61,7 +63,6 @@ impl Solution {
             }
         }
 
-
         -1
     }
     ///
@@ -71,7 +72,7 @@ impl Solution {
         let mut next: Vec<i32> = vec![0; word.len()];
         next[0] = 0;
         let mut i = 1;
-        let mut j = 0;//
+        let mut j = 0;
         while i < word.len() {
             if word[i] == word[j] {
                 next[i] = (j + 1) as i32;
@@ -87,7 +88,6 @@ impl Solution {
             }
         }
 
-
         for i in (1..next.len()).rev() {
             next[i] = next[i - 1];
         }
@@ -97,20 +97,16 @@ impl Solution {
     }
 }
 
-
 fn main() {
-    fn check(s: &str, p: &str) -> i32 {
+    fn check(s: &str, p: &str) {
         let res = Solution::str_str(s.to_string(), p.to_string());
-
         assert_eq!(res, s.find(p).map(|i| i as i32).unwrap_or(-1));
-
-        res
     }
-    assert_eq!(2, check("hello", "ll"));
-    assert_eq!(4, check("aaaaaab", "aab"));
-    assert_eq!(-1, check("hello", "lla"));
-    assert_eq!(4, check("aabaaabaaac", "aabaaac"));
-    assert_eq!(6, check("ababcaababcaabc", "ababcaabc"));
+    check("hello", "ll");
+    check("aaaaaab", "aab");
+    check("hello", "lla");
+    check("aabaaabaaac", "aabaaac");
+    check("ababcaababcaabc", "ababcaabc");
 }
 
 struct Solution {}

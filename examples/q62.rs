@@ -60,7 +60,6 @@ impl Solution {
     }
 }
 
-
 fn main() {
     let s = Solution::unique_paths(2, 3);
     dbg!(s);

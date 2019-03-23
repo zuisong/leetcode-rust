@@ -55,8 +55,8 @@ impl TreeNode {
     }
 }
 
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 
 impl Solution {
     pub fn is_symmetric(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
@@ -77,7 +77,9 @@ impl Solution {
                 && symmetric(&node1_mut.right, &node2_mut.left)
                 && symmetric(&node1_mut.left, &node2_mut.right)
         }
-        if root.is_none() { return true; }
+        if root.is_none() {
+            return true;
+        }
         let root = root.as_ref().unwrap().borrow();
         symmetric(&root.left, &root.right)
     }
@@ -88,4 +90,3 @@ fn main() {
 }
 
 struct Solution {}
-

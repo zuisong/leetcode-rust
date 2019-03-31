@@ -35,25 +35,23 @@ use std::collections::HashMap;
 
 impl Solution {
     pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
-        let mut map = HashMap::new();
+        strs.into_iter()
+            .fold(HashMap::new(),
+                  |mut map, s| {
+                      let hash = s
+                          .as_bytes()
+                          .iter()
+                          .fold([0; 26], |mut hash, &c| {
+                              hash[(c - b'a') as usize] += 1u8;
+                              hash
+                          });
 
-        for s in strs {
-            let mut s1 = s.clone();
-            let x = unsafe { s1.as_bytes_mut() };
-
-            x.sort();
-            let x = String::from_utf8_lossy(x).to_string();
-
-            if !map.contains_key(&x) {
-                map.insert(x.clone(), vec![]);
-            }
-            map.get_mut(&x).unwrap().push(s);
-        }
-
-        dbg!(&map);
-
-        let res: Vec<Vec<String>> = map.into_iter().map(|(_, s)| s).collect();
-        res
+                      map.entry(hash).or_insert(vec![])
+                          .push(s);
+                      map
+                  })
+            .into_iter()
+            .map(|e| e.1).collect()
     }
 }
 

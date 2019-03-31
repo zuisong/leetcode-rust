@@ -11,9 +11,6 @@ impl Solution {
         let mut result = 0;
         let y_len = matrix.first().unwrap_or(&vec![]).len();
 
-        let (s, r) = channel();
-        s.send("");
-
         matrix.iter().enumerate().for_each(|(idx, arr)| {
             let mut heights: Vec<i32> = vec![0; y_len];
             arr.iter().enumerate().for_each(|(idy, _)| {

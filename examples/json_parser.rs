@@ -115,6 +115,34 @@ enum JsonNode {
     Array(Vec<JsonNode>),
 }
 
+impl JsonNode {
+    fn to_json_string(&self) -> String {
+        match self {
+            JsonNode::Object(map) => {
+                let mut s = String::new();
+                s.push('{');
+                let inner = map
+                    .iter()
+                    .map(|(k, v)| format!("\"{}\":{}", *k, v.to_json_string()))
+                    .collect::<Vec<_>>()
+                    .join(",");
+                s.push_str(inner.as_str());
+                s.push('}');
+                s
+            }
+            JsonNode::String(s) => format!("\"{}\"", s),
+            JsonNode::Num(num) => (*num).to_string(),
+            JsonNode::Array(arr) => format!(
+                "[{}]",
+                arr.iter()
+                    .map(|it| it.to_json_string())
+                    .collect::<Vec<_>>()
+                    .join(",")
+            ),
+        }
+    }
+}
+
 fn generate_ast(tokens: Vec<Token>) -> JsonNode {
     fn get_node(mut i: usize, tokens: &Vec<Token>) -> (usize, JsonNode) {
         if tokens[i] == Token::COMMA {
@@ -176,15 +204,15 @@ fn parse(json: String) -> Result<Json, &'static str> {
     let tokens: Vec<Token> = tokenlizer(json);
     dbg!(&tokens);
     let ast = generate_ast(tokens);
-    dbg!(ast);
-
+    dbg!(&ast);
+    let json = ast.to_json_string();
+    println!("{}", json);
     Err("待完成")
 }
 
 fn main() {
     let res = parse(
         r#"
-
 {
     c: -11,
     d: [
@@ -203,9 +231,8 @@ fn main() {
         }
     ]
 }
-
 "#
             .to_string(),
     );
-    dbg!(res);
+    dbg!(res.unwrap_err());
 }

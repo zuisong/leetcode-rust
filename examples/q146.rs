@@ -8,7 +8,7 @@ use std::collections::HashMap;
 use std::rc::Rc;
 
 #[derive(Debug)]
-struct LRUCache {
+pub struct LRUCache {
     capacity: usize,
     m: HashMap<i32, Rc<RefCell<Node>>>,
     head: Option<Rc<RefCell<Node>>>,
@@ -86,7 +86,7 @@ impl LRUCache {
 
     fn put(&mut self, key: i32, value: i32) {
         let contains_key = self.m.contains_key(&key);
-        if self.m.len() >= self.capacity && !contains_key {
+        if !contains_key && self.m.len() >= self.capacity {
             if self.capacity == 1 {
                 self.m.clear();
                 self.head = None;
@@ -101,12 +101,12 @@ impl LRUCache {
         }
 
 
-        let node = Rc::new(RefCell::new(Node::new(key, value)));
         if contains_key {
             let node = self.m.get_mut(&key).unwrap();
             node.as_ref().borrow_mut().val = value;
             self.get(key);
         } else {
+            let node = Rc::new(RefCell::new(Node::new(key, value)));
             self.m.insert(key, node.clone());
             match self.tail.clone() {
                 None => {
@@ -131,35 +131,39 @@ impl LRUCache {
  * let ret_1: i32 = obj.get(key);
  * obj.put(key, value);
  */
-#[test]
-fn test2() {
-    let mut cache = LRUCache::new(2);
-    assert_eq!(cache.get(2), -1);
-    cache.put(2, 6);
-    assert_eq!(cache.get(1), -1);
-    cache.put(1, 5);
-    cache.put(1, 2);
-    assert_eq!(cache.get(1), 2);
-    assert_eq!(cache.get(2), 6);
+
+mod tests {
+    use crate::LRUCache;
+
+    #[test]
+    fn test2() {
+        let mut cache = LRUCache::new(2);
+        assert_eq!(cache.get(2), -1);
+        cache.put(2, 6);
+        assert_eq!(cache.get(1), -1);
+        cache.put(1, 5);
+        cache.put(1, 2);
+        assert_eq!(cache.get(1), 2);
+        assert_eq!(cache.get(2), 6);
 
 //    ["LRUCache","get","put","get","put","put","get","get"]
 //    [[2],[2],[2,6],[1],[1,5],[1,2],[1],[2]]
-    //[null,-1,null,-1,null,null,2,6]
-}
+        //[null,-1,null,-1,null,null,2,6]
+    }
 
-#[test]
-fn test1() {
+    #[test]
+    fn test1() {
 
 //    ["LRUCache","put","put","put","put","get","get"]
 //    [[2],[2,1],[1,1],[2,3],[4,1],[1],[2]]
 //
 
-    let mut cache = LRUCache::new(2);
-    cache.put(2, 1);
-    cache.put(1, 1);
-    cache.put(2, 3);
-    cache.put(4, 1);
-    assert_eq!(cache.get(1), -1);
-    assert_eq!(3, cache.get(2));
+        let mut cache = LRUCache::new(2);
+        cache.put(2, 1);
+        cache.put(1, 1);
+        cache.put(2, 3);
+        cache.put(4, 1);
+        assert_eq!(cache.get(1), -1);
+        assert_eq!(3, cache.get(2));
+    }
 }
-

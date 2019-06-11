@@ -69,7 +69,7 @@ impl Solution {
 }
 
 fn main() {
-    let mut v = vec![1];
+    let mut v = vec![1, 1, 2, 2, 2, 5, 6];
     let s = Solution::remove_duplicates(&mut v);
     dbg!(v);
     dbg!(s);

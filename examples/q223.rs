@@ -41,3 +41,5 @@ impl Solution {
         (c - a) * (d - b) + (g - e) * (h - f) - temp
     }
 }
+
+struct Solution {}

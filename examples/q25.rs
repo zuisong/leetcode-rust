@@ -25,7 +25,6 @@ k 是一个正整数，它的值小于或等于链表的长度。
 
 */
 
-
 // Definition for singly-linked list.
 #[derive(PartialEq, Eq, Clone, Debug)]
 pub struct ListNode {
@@ -36,16 +35,15 @@ pub struct ListNode {
 impl ListNode {
     #[inline]
     fn new(val: i32) -> Self {
-        ListNode {
-            next: None,
-            val,
-        }
+        ListNode { next: None, val }
     }
 }
 
 impl Solution {
     pub fn reverse_k_group(mut head: Option<Box<ListNode>>, k: i32) -> Option<Box<ListNode>> {
-        if k == 1 { return head; }
+        if k == 1 {
+            return head;
+        }
         let next_head = {
             let mut temp = &mut head;
             for _ in 0..k {
@@ -62,7 +60,7 @@ impl Solution {
         node.as_mut().unwrap().next = next_head;
         let mut new_head = node;
         node = next;
-        for i in 1..k {
+        for _i in 1..k {
             let next = node.as_mut().unwrap().next.take();
             node.as_mut().unwrap().next = new_head;
             new_head = node;

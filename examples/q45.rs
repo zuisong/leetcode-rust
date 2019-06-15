@@ -37,7 +37,6 @@ impl Solution {
             return 0;
         }
 
-
         // 保存跳 jump 步 可以到达 并且 jump-1 步不能到达 的最左边点
         let mut start = 0;
         // 保存跳 jump 步 可以到达的最右边点

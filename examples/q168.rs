@@ -31,8 +31,6 @@
 //
 //
 
-
-
 impl Solution {
     pub fn convert_to_title(n: i32) -> String {
         use core::fmt::Write;
@@ -47,10 +45,12 @@ impl Solution {
             let mut s = String::new();
             let i = n % 26;
             if i == 0 {
-                s.write_str(Self::convert_to_title(n / 26 - 1).as_ref()).unwrap();
+                s.write_str(Self::convert_to_title(n / 26 - 1).as_ref())
+                    .unwrap();
                 s.write_str(Self::convert_to_title(26).as_ref()).unwrap();
             } else {
-                s.write_str(Self::convert_to_title(n / 26).as_ref()).unwrap();
+                s.write_str(Self::convert_to_title(n / 26).as_ref())
+                    .unwrap();
                 s.write_str(Self::convert_to_title(i).as_ref()).unwrap();
             }
             return s;

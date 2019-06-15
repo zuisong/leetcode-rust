@@ -38,8 +38,19 @@ impl ListNode {
 }
 
 impl Solution {
-    pub fn reverse_between(mut head: Option<Box<ListNode>>, m: i32, n: i32) -> Option<Box<ListNode>> {
-        fn ddd(mut node: Option<Box<ListNode>>, head: Option<Box<ListNode>>, mut tail: *mut Option<Box<ListNode>>, m: i32, n: i32, p: i32) -> Option<Box<ListNode>> {
+    pub fn reverse_between(
+        mut head: Option<Box<ListNode>>,
+        m: i32,
+        n: i32,
+    ) -> Option<Box<ListNode>> {
+        fn ddd(
+            mut node: Option<Box<ListNode>>,
+            head: Option<Box<ListNode>>,
+            mut tail: *mut Option<Box<ListNode>>,
+            m: i32,
+            n: i32,
+            p: i32,
+        ) -> Option<Box<ListNode>> {
             if p >= m && p <= n {
                 let n1 = std::mem::replace(&mut node.as_mut().unwrap().next, None);
                 if head.is_none() {

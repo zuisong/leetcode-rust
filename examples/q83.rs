@@ -35,10 +35,7 @@ pub struct ListNode {
 impl ListNode {
     #[inline]
     fn new(val: i32) -> Self {
-        ListNode {
-            next: None,
-            val,
-        }
+        ListNode { next: None, val }
     }
 }
 
@@ -76,7 +73,6 @@ impl Solution {
     }
 }
 
-
 fn main() {
     let mut l1 = ListNode::new(1);
     let mut l2 = ListNode::new(1);
@@ -89,7 +85,7 @@ fn main() {
     l3.next = Some(Box::new(l4));
     l2.next = Some(Box::new(l3));
     l1.next = Some(Box::new(l2));
-//    dbg!(&l1);
+    //    dbg!(&l1);
     let l1 = Solution::delete_duplicates(Some(Box::new(l1)));
     dbg!(&l1);
 }

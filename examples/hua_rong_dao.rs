@@ -6,13 +6,13 @@ fn main() {
         vec![1, 2, 3, 4],
         vec![4, 5, 6, 7],
         vec![8, 9, 0, 11],
-        vec![12, 13, 10, 14]
+        vec![12, 13, 10, 14],
     ];
     let target = vec![
         vec![1, 2, 3, 4],
         vec![4, 5, 6, 7],
         vec![8, 9, 10, 11],
-        vec![12, 13, 14, 0]
+        vec![12, 13, 14, 0],
     ];
     let mut map = HashMap::new();
     solve(&mut res, &hash(&target), (2, 2), &mut map);
@@ -20,34 +20,37 @@ fn main() {
     dbg!(res);
 }
 
-fn solve(re: &mut Vec<Vec<i32>>,
-         target_hash: &String,
-         pos0: (i32, i32),
-         map: &mut HashMap<String, (String, (i32, i32))>) {
+fn solve(
+    re: &mut Vec<Vec<i32>>,
+    target_hash: &String,
+    pos0: (i32, i32),
+    map: &mut HashMap<String, (String, (i32, i32))>,
+) {
     let len_y = re.first().unwrap().len() as i32;
     let len_x = re.len() as i32;
     let h = hash(re);
-
 
     if h == *target_hash {
         let mut h = h;
         let mut route = vec![];
         while map.contains_key(&h) {
             let temp = map.get(&h).unwrap_or(&(String::new(), (0, 0))).1;
-//            println!("{:?}", temp);
+            //            println!("{:?}", temp);
             let step = match temp {
                 (0, 1) => "右",
                 (1, 0) => "下",
                 (0, -1) => "左",
                 (-1, 0) => "上",
-                _ => unreachable!()
+                _ => unreachable!(),
             };
 
             route.push(step);
             h = map.get(&h).unwrap().0.to_string();
-//            println!("{:?}", h);
+            //            println!("{:?}", h);
         }
-        route.iter().rev().for_each(|s| { dbg!(s); });
+        route.iter().rev().for_each(|s| {
+            dbg!(s);
+        });
 
         exit(0)
     } else {
@@ -69,12 +72,7 @@ fn solve(re: &mut Vec<Vec<i32>>,
 
             if !map.contains_key(&hash_temp) {
                 map.insert(hash_temp.clone(), (h.clone(), (*i, *j)));
-                solve(
-                    re,
-                    target_hash,
-                    (new_pos0x as i32, new_pos0y as i32),
-                    map,
-                );
+                solve(re, target_hash, (new_pos0x as i32, new_pos0y as i32), map);
                 map.remove(&hash_temp);
                 re[new_pos0x][new_pos0y] = temp;
                 re[pos0.0 as usize][pos0.1 as usize] = 0;
@@ -86,5 +84,3 @@ fn solve(re: &mut Vec<Vec<i32>>,
 fn hash(v: &Vec<Vec<i32>>) -> String {
     format!("{:?}", v)
 }
-
-

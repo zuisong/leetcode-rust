@@ -38,7 +38,6 @@ data = [235, 140, 4], 表示 8 位的序列: 11101011 10001100 00000100.
 
 */
 
-
 fn main() {
     let data = vec![235, 140, 4];
     let is_utf8 = Solution::valid_utf8(data);
@@ -72,8 +71,12 @@ impl Solution {
             }
             for n in 1..4 {
                 // 到这里来了至少是双字节字符
-                if i + n >= data.len() { return false; }
-                if (data[i + n] >> 6) != 0b10 { return false; }
+                if i + n >= data.len() {
+                    return false;
+                }
+                if (data[i + n] >> 6) != 0b10 {
+                    return false;
+                }
 
                 if byte & (0b1000_0000 >> (n + 1)) as u8 == 0 {
                     // 第一个字节为 110X_XXXX型
@@ -87,4 +90,3 @@ impl Solution {
         return true;
     }
 }
-

@@ -13,9 +13,12 @@ fn main() {
         bytes.iter().for_each(|it| print!("{:08b} ", it));
         println!();
     }
-    println!("{:20} 解密后--> {:20}", base64, String::from_utf8(bytes).unwrap());
+    println!(
+        "{:20} 解密后--> {:20}",
+        base64,
+        String::from_utf8(bytes).unwrap()
+    );
 }
-
 
 ///
 ///
@@ -33,24 +36,23 @@ fn main() {
 /// Python内置的base64可以直接进行base64的编解码：
 ///
 
-const BASE64_ALPHABET: [u8; 64] =
-    [
-        b'A', b'B', b'C', b'D', b'E', b'F', b'G', b'H', b'I', b'J', //   0 -   9
-        b'K', b'L', b'M', b'N', b'O', b'P', b'Q', b'R', b'S', b'T', //  10 -  19
-        b'U', b'V', b'W', b'X', b'Y', b'Z', b'a', b'b', b'c', b'd', //  20 -  29
-        b'e', b'f', b'g', b'h', b'i', b'j', b'k', b'l', b'm', b'n', //  30 -  39
-        b'o', b'p', b'q', b'r', b's', b't', b'u', b'v', b'w', b'x', //  40 -  49
-        b'y', b'z', b'0', b'1', b'2', b'3', b'4', b'5', b'6', b'7', //  50 -  59
-        b'8', b'9', b'+', b'/'                  //  60 -  63
-    ];
+const BASE64_ALPHABET: [u8; 64] = [
+    b'A', b'B', b'C', b'D', b'E', b'F', b'G', b'H', b'I', b'J', //   0 -   9
+    b'K', b'L', b'M', b'N', b'O', b'P', b'Q', b'R', b'S', b'T', //  10 -  19
+    b'U', b'V', b'W', b'X', b'Y', b'Z', b'a', b'b', b'c', b'd', //  20 -  29
+    b'e', b'f', b'g', b'h', b'i', b'j', b'k', b'l', b'm', b'n', //  30 -  39
+    b'o', b'p', b'q', b'r', b's', b't', b'u', b'v', b'w', b'x', //  40 -  49
+    b'y', b'z', b'0', b'1', b'2', b'3', b'4', b'5', b'6', b'7', //  50 -  59
+    b'8', b'9', b'+', b'/', //  60 -  63
+];
 
 const BASE64_DEALPHABET: [u8; 128] = [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 62, 0, 0, 0, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61,
-    0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
-    25, 0, 0, 0, 0, 0, 0, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48,
-    49, 50, 51, 0, 0, 0, 0, 0, ];
-
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 62, 0, 0, 0, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 0, 0,
+    0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22, 23, 24, 25, 0, 0, 0, 0, 0, 0, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+    41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 0, 0, 0, 0, 0,
+];
 
 fn encode_base64(data: &[u8]) -> String {
     let len = data.len();
@@ -63,16 +65,20 @@ fn encode_base64(data: &[u8]) -> String {
                 res.push((data.get(i).unwrap_or(&0u8) & 0b1111_1100) >> 2);
             }
             1 => {
-                res.push(((data.get(i - 1).unwrap_or(&0u8) & 0b0000_0011) << 4)
-                    + ((data.get(i).unwrap_or(&0u8) & 0b1111_0000) >> 4));
+                res.push(
+                    ((data.get(i - 1).unwrap_or(&0u8) & 0b0000_0011) << 4)
+                        + ((data.get(i).unwrap_or(&0u8) & 0b1111_0000) >> 4),
+                );
 
-                res.push(((data.get(i + 1).unwrap_or(&0u8) & 0b1100_0000) >> 6)
-                    + ((data.get(i).unwrap_or(&0u8) & 0b0000_1111) << 2));
+                res.push(
+                    ((data.get(i + 1).unwrap_or(&0u8) & 0b1100_0000) >> 6)
+                        + ((data.get(i).unwrap_or(&0u8) & 0b0000_1111) << 2),
+                );
             }
             2 => {
                 res.push(data.get(i).unwrap_or(&0u8) & 0b0011_1111);
             }
-            _ => unreachable!()
+            _ => unreachable!(),
         }
         if j == 2 {
             j = 0;
@@ -115,24 +121,17 @@ fn decode_base64(base64_str: &String) -> Vec<u8> {
     for i in 0..bytes.len() {
         let j = i % 4;
         let b: u8 = match j {
-            0 => {
-                (bytes[i] << 2) + ((bytes[i + 1] & 0b0011_0000) >> 4)
-            }
-            1 => {
-                ((bytes[i] & 0b0000_1111) << 4) + ((bytes[i + 1] & 0b0011_1100) >> 2)
-            }
-            2 => {
-                ((bytes[i] & 0b0000_0011) << 6) + (bytes[i + 1] & 0b0011_1111)
-            }
+            0 => (bytes[i] << 2) + ((bytes[i + 1] & 0b0011_0000) >> 4),
+            1 => ((bytes[i] & 0b0000_1111) << 4) + ((bytes[i + 1] & 0b0011_1100) >> 2),
+            2 => ((bytes[i] & 0b0000_0011) << 6) + (bytes[i + 1] & 0b0011_1111),
             3 => {
                 continue;
             }
-            _ => unreachable!()
+            _ => unreachable!(),
         };
 
         res.push(b);
-    };
-
+    }
 
     if n1 {
         res.pop();

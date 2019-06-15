@@ -91,7 +91,7 @@ impl Solution {
                 dp[i][j] = match p[j - 1] {
                     b'*' => dp[i - 1][j] || dp[i][j - 1],
                     b'?' => dp[i - 1][j - 1],
-                    _ => dp[i - 1][j - 1] && p[j - 1] == s[i - 1]
+                    _ => dp[i - 1][j - 1] && p[j - 1] == s[i - 1],
                 }
             }
         }

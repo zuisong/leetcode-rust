@@ -66,5 +66,4 @@ fn main() {
     });
 }
 
-
 struct Solution {}

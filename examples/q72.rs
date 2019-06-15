@@ -97,7 +97,6 @@ impl Solution {
         route.push(temp);
         route.iter().for_each(|it| println!("{:?}", it));
 
-
         let mut route_str: Vec<String> = vec![];
         route_str.push(word2.iter().collect());
 
@@ -120,7 +119,7 @@ impl Solution {
                 word2.insert(p2.0, word1[p1.1]);
             };
             route_str.push(word2.iter().collect());
-        };
+        }
         route_str.iter().for_each(|it| println!("{:?}", it));
         dp[l2][l1] as i32
     }

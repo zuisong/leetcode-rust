@@ -62,16 +62,16 @@ impl Solution {
             k = k % jn;
         }
 
-
         for n in v {
             res.push(n)
         }
 
-        res.iter().map(|it| (*it).to_string())
-            .collect::<Vec<_>>().join("")
+        res.iter()
+            .map(|it| (*it).to_string())
+            .collect::<Vec<_>>()
+            .join("")
     }
 }
-
 
 struct Solution {}
 

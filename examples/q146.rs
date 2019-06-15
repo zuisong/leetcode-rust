@@ -34,7 +34,6 @@ impl Node {
     }
 }
 
-
 /**
  * `&self` means the method takes an immutable reference.
  * If you need a mutable reference, change it to `&mut self` instead.
@@ -80,7 +79,7 @@ impl LRUCache {
 
                 RefCell::borrow(v).val
             }
-            None => -1
+            None => -1,
         }
     }
 
@@ -99,7 +98,6 @@ impl LRUCache {
                 self.m.remove(&head.borrow().key);
             }
         }
-
 
         if contains_key {
             let node = self.m.get_mut(&key).unwrap();
@@ -146,17 +144,16 @@ mod tests {
         assert_eq!(cache.get(1), 2);
         assert_eq!(cache.get(2), 6);
 
-//    ["LRUCache","get","put","get","put","put","get","get"]
-//    [[2],[2],[2,6],[1],[1,5],[1,2],[1],[2]]
+        //    ["LRUCache","get","put","get","put","put","get","get"]
+        //    [[2],[2],[2,6],[1],[1,5],[1,2],[1],[2]]
         //[null,-1,null,-1,null,null,2,6]
     }
 
     #[test]
     fn test1() {
-
-//    ["LRUCache","put","put","put","put","get","get"]
-//    [[2],[2,1],[1,1],[2,3],[4,1],[1],[2]]
-//
+        //    ["LRUCache","put","put","put","put","get","get"]
+        //    [[2],[2,1],[1,1],[2,3],[4,1],[1],[2]]
+        //
 
         let mut cache = LRUCache::new(2);
         cache.put(2, 1);

@@ -1,12 +1,10 @@
 use std::collections::HashMap;
 
-#[derive(Debug)]
-struct Json {}
-
-#[derive(Debug, Eq, PartialEq)]
+#[derive(Debug, PartialEq)]
 enum Token {
-    NUM(i32),
-    STR(String),
+    Num(i32),
+    NumFloat(f32),
+    Str(String),
     /// 左大括号
     LBig,
     /// 右大括号
@@ -21,7 +19,7 @@ enum Token {
     COMMA,
 }
 
-fn tokenlizer(json: String) -> Vec<Token> {
+fn tokenlizer(json: String) -> Result<Vec<Token>, failure::Error> {
     let mut tokens = vec![];
 
     let chars: Vec<_> = json.chars().collect();
@@ -64,13 +62,20 @@ fn tokenlizer(json: String) -> Vec<Token> {
 
         if chars[i].is_numeric() || chars[i] == '-' {
             let mut j = i + 1;
-
-            while chars[j].is_numeric() {
+            let mut is_float = false;
+            while chars[j].is_numeric() || chars[j] == '.' {
                 j += 1;
+                if chars[j] == '.' {
+                    is_float = true;
+                }
             }
 
             let s: String = chars.iter().skip(i).take(j - i).collect();
-            tokens.push(Token::NUM(s.parse().unwrap()));
+            if is_float {
+                tokens.push(Token::NumFloat(s.parse()?));
+            } else {
+                tokens.push(Token::Num(s.parse()?));
+            }
 
             i = j;
             continue;
@@ -82,7 +87,7 @@ fn tokenlizer(json: String) -> Vec<Token> {
                 j += 1;
             }
             let s: String = chars.iter().skip(i + 1).take(j - i - 1).collect();
-            tokens.push(Token::STR(s));
+            tokens.push(Token::Str(s));
 
             i = j;
         }
@@ -95,7 +100,7 @@ fn tokenlizer(json: String) -> Vec<Token> {
             }
 
             let s: String = chars.iter().skip(i).take(j - i).collect();
-            tokens.push(Token::STR(s));
+            tokens.push(Token::Str(s));
 
             i = j;
             continue;
@@ -104,14 +109,15 @@ fn tokenlizer(json: String) -> Vec<Token> {
         i += 1;
     }
 
-    tokens
+    Ok(tokens)
 }
 
-#[derive(Debug, Eq, PartialEq)]
+#[derive(Debug, PartialEq)]
 enum JsonNode {
     Object(HashMap<String, JsonNode>),
     String(String),
     Num(i32),
+    NumFloat(f32),
     Array(Vec<JsonNode>),
 }
 
@@ -123,15 +129,16 @@ impl JsonNode {
                 s.push('{');
                 let inner = map
                     .iter()
-                    .map(|(k, v)| format!("\"{}\":{}", *k, v.to_json_string()))
+                    .map(|(k, v)| format!(r#""{}":{}"#, *k, v.to_json_string()))
                     .collect::<Vec<_>>()
                     .join(",");
                 s.push_str(inner.as_str());
                 s.push('}');
                 s
             }
-            JsonNode::String(s) => format!("\"{}\"", s),
+            JsonNode::String(s) => format!(r#""{}""#, s.replace(r#"""#, r#"\""#)),
             JsonNode::Num(num) => (*num).to_string(),
+            JsonNode::NumFloat(num) => (*num).to_string(),
             JsonNode::Array(arr) => format!(
                 "[{}]",
                 arr.iter()
@@ -149,11 +156,15 @@ fn generate_ast(tokens: Vec<Token>) -> JsonNode {
             i += 1;
         }
 
-        if let Token::NUM(num) = &tokens[i] {
+        if let Token::Num(num) = &tokens[i] {
             return (i + 1, JsonNode::Num(*num));
         }
 
-        if let Token::STR(s) = &tokens[i] {
+        if let Token::NumFloat(num) = &tokens[i] {
+            return (i + 1, JsonNode::NumFloat(*num));
+        }
+
+        if let Token::Str(s) = &tokens[i] {
             return (i + 1, JsonNode::String(s.clone()));
         }
 
@@ -161,7 +172,7 @@ fn generate_ast(tokens: Vec<Token>) -> JsonNode {
             i += 1;
             let mut map = HashMap::new();
             loop {
-                if let Token::STR(name) = &tokens[i] {
+                if let Token::Str(name) = &tokens[i] {
                     i += 2;
                     let (idx, node) = get_node(i, tokens);
                     map.insert(name.clone(), node);
@@ -198,23 +209,19 @@ fn generate_ast(tokens: Vec<Token>) -> JsonNode {
     get_node(0, &tokens).1
 }
 
-fn parse(json: String) -> Result<Json, &'static str> {
+fn parse(json: String) -> Result<JsonNode, failure::Error> {
     println!("{:?}", json);
 
-    let tokens: Vec<Token> = tokenlizer(json);
+    let tokens: Vec<Token> = tokenlizer(json)?;
     dbg!(&tokens);
-    let ast = generate_ast(tokens);
-    dbg!(&ast);
-    let json = ast.to_json_string();
-    println!("{}", json);
-    Err("待完成")
+    Ok(generate_ast(tokens))
 }
 
-fn main() {
+fn main() -> Result<(), failure::Error> {
     let res = parse(
         r#"
 {
-    c: -11,
+    c: -11.1,
     d: [
         1,
         {
@@ -224,7 +231,7 @@ fn main() {
                 d: [
                     1,
                     {
-                        f: 'ggga'
+                        f: 'gg"ga'
                     }
                 ]
             }
@@ -233,6 +240,9 @@ fn main() {
 }
 "#
             .to_string(),
-    );
-    dbg!(res.unwrap_err());
+    )?;
+    dbg!(&res);
+    println!("{}", res.to_json_string());
+
+    Ok(())
 }

@@ -54,7 +54,7 @@ fn solve(
 
         exit(0)
     } else {
-        for (i, j) in [(0, 1), (0, -1), (1, 0), (-1, 0)].iter() {
+        for (ref i, ref j) in [(0, 1), (0, -1), (1, 0), (-1, 0)].iter() {
             if pos0.0 + i < 0 || pos0.0 + i >= len_x {
                 continue;
             }

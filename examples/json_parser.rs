@@ -239,7 +239,7 @@ fn main() -> Result<(), failure::Error> {
     ]
 }
 "#
-            .to_string(),
+        .to_string(),
     )?;
     dbg!(&res);
     println!("{}", res.to_json_string());

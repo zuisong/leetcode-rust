@@ -33,12 +33,12 @@ use std::collections::HashMap;
 /// 递归解
 fn func2(target: usize) {
     /// 用指定的几种面值的钱，组合成目标值, 有多少种可能
-///
-/// # 参数
-/// * coins 表示硬币类型
-/// * k 表示可以使用的硬币类型  总类型的前几种
-/// * target 组合的目标
-/// * cache 缓存用 减少重复计算的
+    ///
+    /// # 参数
+    /// * coins 表示硬币类型
+    /// * k 表示可以使用的硬币类型  总类型的前几种
+    /// * target 组合的目标
+    /// * cache 缓存用 减少重复计算的
     fn count(coins: &[i32], k: usize, target: i32, cache: &mut HashMap<(usize, i32), u64>) -> u64 {
         // 目标值是0 递归结束 有一种可能性
         if target == 0 {
@@ -74,5 +74,3 @@ fn func2(target: usize) {
     println!("程序运行时间是 --> {:?}", end - start);
     println!("共有 {} 种可能性", res);
 }
-
-

@@ -54,7 +54,7 @@ fn solve(
 
         exit(0)
     } else {
-        for (ref i, ref j) in [(0, 1), (0, -1), (1, 0), (-1, 0)].iter() {
+        for (i, j) in [(0, 1), (0, -1), (1, 0), (-1, 0)].to_vec().into_iter() {
             if pos0.0 + i < 0 || pos0.0 + i >= len_x {
                 continue;
             }
@@ -71,7 +71,7 @@ fn solve(
             let hash_temp = hash(&re);
 
             if !map.contains_key(&hash_temp) {
-                map.insert(hash_temp.clone(), (h.clone(), (*i, *j)));
+                map.insert(hash_temp.clone(), (h.clone(), (i, j)));
                 solve(re, target_hash, (new_pos0x as i32, new_pos0y as i32), map);
                 map.remove(&hash_temp);
                 re[new_pos0x][new_pos0y] = temp;

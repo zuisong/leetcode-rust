@@ -1,18 +1,14 @@
 fn main() {
-    let word = "a";
+    let word = "chenjian";
     let bytes = word.as_bytes();
-    {
-        bytes.iter().for_each(|it| print!("{:08b} ", it));
-        println!();
-    }
+    bytes.iter().for_each(|it| print!("{:08b} ", it));
+    println!();
     let base64 = encode_base64(bytes);
     println!("{:20} 加密后--> {:20}", word, base64);
 
     let bytes = decode_base64(&base64);
-    {
-        bytes.iter().for_each(|it| print!("{:08b} ", it));
-        println!();
-    }
+    bytes.iter().for_each(|it| print!("{:08b} ", it));
+    println!();
     println!(
         "{:20} 解密后--> {:20}",
         base64,

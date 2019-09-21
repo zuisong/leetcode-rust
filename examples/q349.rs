@@ -19,8 +19,6 @@
 //
 // Related Topics 排序 哈希表 双指针 二分查找
 
-
-
 use std::collections::HashSet;
 use std::iter::FromIterator;
 
@@ -30,10 +28,7 @@ impl Solution {
         let set1: HashSet<i32> = HashSet::from_iter(nums1.into_iter());
         let set2: HashSet<i32> = HashSet::from_iter(nums2.into_iter());
 
-        set2
-            .into_iter()
-            .filter(|it| set1.contains(it))
-            .collect()
+        set2.into_iter().filter(|it| set1.contains(it)).collect()
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

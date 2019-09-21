@@ -144,7 +144,9 @@ mod tests {
     use crate::bst::BinarySearchTree;
     use crate::SimpleBinarySearchTree;
 
-    #[rstest_parametrize(input, expected,
+    #[rstest_parametrize(
+    input,
+    expected,
     case(0, 0),
     case(1, 1),
     case(2, 1),
@@ -188,7 +190,6 @@ mod tests {
         assert_eq!(false, tree.find(2));
         tree.remove(3);
         assert_eq!(false, tree.find(3));
-
 
         assert_eq!(false, tree.find(0));
     }

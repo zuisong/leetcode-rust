@@ -1,3 +1,6 @@
+#[macro_use]
+extern crate lazy_static;
+
 fn main() {
     let word = "chenjian";
     let bytes = word.as_bytes();
@@ -42,13 +45,15 @@ const BASE64_ALPHABET: [u8; 64] = [
     b'8', b'9', b'+', b'/', //  60 -  63
 ];
 
-const BASE64_DEALPHABET: [u8; 128] = [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 62, 0, 0, 0, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 0, 0,
-    0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24, 25, 0, 0, 0, 0, 0, 0, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-    41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 0, 0, 0, 0, 0,
-];
+lazy_static! {
+    static ref BASE64_DEALPHABET: [u8; 128] = {
+        let mut v: [u8; 128] = [0_u8; 128];
+        for (idx, &val) in BASE64_ALPHABET.iter().enumerate() {
+            v[val as usize] = idx as u8;
+        }
+        v
+    };
+}
 
 fn encode_base64(data: &[u8]) -> String {
     let len = data.len();
@@ -58,29 +63,29 @@ fn encode_base64(data: &[u8]) -> String {
     for i in 0..((len - 1) / 3 + 1) * 3 {
         match j {
             0 => {
-                res.push((data.get(i).unwrap_or(&0u8) & 0b1111_1100) >> 2);
+                res.push((data.get(i).unwrap_or(&0_u8) & 0b1111_1100) >> 2);
             }
             1 => {
                 res.push(
-                    ((data.get(i - 1).unwrap_or(&0u8) & 0b0000_0011) << 4)
-                        + ((data.get(i).unwrap_or(&0u8) & 0b1111_0000) >> 4),
+                    ((data.get(i - 1).unwrap_or(&0_u8) & 0b0000_0011) << 4)
+                        + ((data.get(i).unwrap_or(&0_u8) & 0b1111_0000) >> 4),
                 );
 
                 res.push(
-                    ((data.get(i + 1).unwrap_or(&0u8) & 0b1100_0000) >> 6)
-                        + ((data.get(i).unwrap_or(&0u8) & 0b0000_1111) << 2),
+                    ((data.get(i + 1).unwrap_or(&0_u8) & 0b1100_0000) >> 6)
+                        + ((data.get(i).unwrap_or(&0_u8) & 0b0000_1111) << 2),
                 );
             }
             2 => {
-                res.push(data.get(i).unwrap_or(&0u8) & 0b0011_1111);
+                res.push(data.get(i).unwrap_or(&0_u8) & 0b0011_1111);
             }
             _ => unreachable!(),
-        }
+        };
         if j == 2 {
             j = 0;
         } else {
             j += 1;
-        }
+        };
     }
     res.iter().for_each(|it| print!("{:06b} ", it));
     println!();
@@ -90,10 +95,10 @@ fn encode_base64(data: &[u8]) -> String {
     if n == 1 {
         res[len - 1] = b'=';
         res[len - 2] = b'=';
-    }
+    };
     if n == 2 {
         res[len - 1] = b'=';
-    }
+    };
     return String::from_utf8(res).unwrap();
 }
 

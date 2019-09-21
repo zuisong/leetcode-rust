@@ -7,34 +7,36 @@ pub struct Solution {}
 
 impl Solution {
     pub fn largest_rectangle_area(heights: Vec<i32>) -> i32 {
-        let mut stack: Vec<i32> = Vec::new();
+        let mut stack: Vec<usize> = Vec::new();
 
         let mut result = 0;
 
-        for height in heights {
-            if stack.last().unwrap_or(&0) > &height {
-                let mut i = 0;
-                while stack.last().unwrap_or(&0) > &height {
-                    i += 1;
-                    result = result.max(stack.pop().unwrap() * i);
-                }
-                for _ in 0..=i {
-                    stack.push(height)
-                }
-            } else {
-                stack.push(height);
-            };
+        for (idx, height) in heights.iter().enumerate() {
+            while !stack.is_empty() && heights[*stack.last().unwrap()] >= *height {
+                let i = stack.pop().unwrap();
+                result = result.max(
+                    heights[i] * (idx as i32 - 1 - stack.last().map(|it| *it as i32).unwrap_or(-1)),
+                );
+            }
+            stack.push(idx);
         }
-        result = stack
-            .iter()
-            .enumerate()
-            .fold(result, |a, (idx, v)| a.max(v * (stack.len() - idx) as i32));
 
-        return result;
+        //        dbg!(&stack);
+
+        while !stack.is_empty() {
+            let idx = stack.pop().unwrap();
+            result = result.max(
+                heights[idx]
+                    * (heights.len() as i32 - 1 - stack.last().map(|it| *it as i32).unwrap_or(-1))
+                    as i32,
+            );
+        }
+
+        result
     }
 }
 
 fn main() {
-    let res = Solution::largest_rectangle_area(vec![4, 3, 5, 6]);
+    let res = Solution::largest_rectangle_area(vec![5, 4, 1, 2]);
     println!("{}", res);
 }

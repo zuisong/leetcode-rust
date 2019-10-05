@@ -1,21 +1,23 @@
 #![feature(test)]
-//#![allow(unused_imports)]
 
 extern crate test;
 
-use test::Bencher;
+use log::*;
 
-#[bench]
-fn main1(b: &mut Bencher) {
-    b.iter(|| main())
+fn init_logger() {
+    env_logger::Builder::default()
+        .filter_level(LevelFilter::Debug)
+        .init();
 }
 
 fn main() {
+    init_logger();
+
     let d = f1();
 
-    println!("23456");
+    info!("23456");
 
-    println!("Hello World, {}", d(1000));
+    info!("Hello World, {}", d(1000));
 }
 
 fn f1() -> Box<dyn Fn(i32) -> i32> {

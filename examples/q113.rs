@@ -66,9 +66,9 @@ impl Solution {
                         _ => {}
                     }
 
-                    let mut l_res = path_sum(&node.left, sum - node.val);
-                    let mut r_res = path_sum(&node.right, sum - node.val);
-                    let mut v = match (l_res, r_res) {
+                    let l_res = path_sum(&node.left, sum - node.val);
+                    let r_res = path_sum(&node.right, sum - node.val);
+                    let v = match (l_res, r_res) {
                         (Some(mut v1), Some(mut v2)) => {
                             v1.append(&mut v2);
                             Some(v1)

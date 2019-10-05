@@ -1,5 +1,4 @@
 extern crate log;
-extern crate simple_logger;
 
 use log::*;
 
@@ -72,7 +71,9 @@ impl Solution {
 }
 
 fn main() {
-    simple_logger::init().unwrap();
+    env_logger::Builder::default()
+        .filter_level(LevelFilter::Debug)
+        .init();
 
     let mut board: Vec<Vec<char>> = vec![
         vec!['5', '3', '.', '.', '7', '.', '.', '.', '.'],

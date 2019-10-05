@@ -76,11 +76,11 @@ impl BinarySearchTree for SimpleBinarySearchTree {
                                 let n = node.as_mut().unwrap();
 
                                 if n.borrow_mut().left.is_none() {
-                                    let mut right =
+                                    let right =
                                         std::mem::replace(&mut n.borrow_mut().right, None);
                                     std::mem::replace(node, right);
                                 } else if n.borrow_mut().right.is_none() {
-                                    let mut left =
+                                    let left =
                                         std::mem::replace(&mut n.borrow_mut().left, None);
                                     std::mem::replace(node, left);
                                 } else {
@@ -113,7 +113,7 @@ impl BinarySearchTree for SimpleBinarySearchTree {
             }
         }
 
-        let mut node: &Option<Rc<RefCell<TreeNode>>> = &self.root;
+        let node: &Option<Rc<RefCell<TreeNode>>> = &self.root;
         find(node, item)
     }
 }

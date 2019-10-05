@@ -83,7 +83,7 @@ impl Solution {
 fn main() {
     let matrix: Vec<Vec<i32>> = vec![vec![1, 2, 3], vec![4, 5, 6], vec![7, 8, 9]];
 
-    let matrix2: Vec<Vec<i32>> = vec![vec![1], vec![5], vec![9]];
+    let _matrix2: Vec<Vec<i32>> = vec![vec![1], vec![5], vec![9]];
 
     let res = Solution::spiral_order(matrix);
     println!("{:?}", res)

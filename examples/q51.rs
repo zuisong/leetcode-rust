@@ -41,7 +41,6 @@
  */
 
 extern crate log;
-extern crate simple_logger;
 
 use log::*;
 
@@ -101,7 +100,9 @@ impl Solution {
 }
 
 fn main() {
-    simple_logger::init().unwrap();
+    env_logger::Builder::default()
+        .filter_level(LevelFilter::Debug)
+        .init();
     let result = Solution::solve_n_queens(8);
 
     info!("{}", result.len());

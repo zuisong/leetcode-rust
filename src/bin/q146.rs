@@ -164,3 +164,7 @@ mod tests {
         assert_eq!(3, cache.get(2));
     }
 }
+
+fn main() {
+
+}

@@ -4,9 +4,7 @@ use std::cell::RefCell;
 use std::cmp::Ordering;
 use std::rc::Rc;
 
-use crate::bst::*;
-
-pub mod bst;
+use leetcode_rust::bst::{BinarySearchTree};
 
 // Definition for a binary tree node.
 #[derive(Debug, PartialEq, Eq)]
@@ -141,8 +139,8 @@ mod tests {
     use rstest::rstest;
     use rstest::rstest_parametrize;
 
-    use crate::bst::BinarySearchTree;
     use crate::SimpleBinarySearchTree;
+    use leetcode_rust::bst::BinarySearchTree;
 
     #[rstest_parametrize(
     input,

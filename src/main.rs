@@ -1,7 +1,3 @@
-#![feature(test)]
-
-extern crate test;
-
 use log::*;
 
 fn init_logger() {

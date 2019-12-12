@@ -61,18 +61,26 @@ impl Solution {
     }
 }
 
-fn main() {
-    assert_eq!(4, Solution::longest_valid_parentheses(")()())".to_string()));
-    assert_eq!(2, Solution::longest_valid_parentheses("(()".to_string()));
-    assert_eq!(
-        4,
-        Solution::longest_valid_parentheses("(())(((".to_string())
-    );
-    assert_eq!(
-        4,
-        Solution::longest_valid_parentheses("(()()((".to_string())
-    );
-    assert_eq!(0, Solution::longest_valid_parentheses("".to_string()));
-}
+fn main() {}
 
 struct Solution {}
+
+#[cfg(test)]
+mod tests {
+    use test_case::test_case;
+
+    use crate::Solution;
+
+    #[test_case(4, ")()())"; "1")]
+    #[test_case(2, "(()"; "2")]
+    #[test_case(4, "(())((("; "3")]
+    #[test_case(4, "(()()(("; "4")]
+    #[test_case(0, ""; "5")]
+    #[test_case(4, ")()())"; "6")]
+    fn test_pair(n: i32, s: &str) {
+        assert_eq!(n, Solution::longest_valid_parentheses(s.to_string()));
+    }
+
+    #[test]
+    fn test1() {}
+}

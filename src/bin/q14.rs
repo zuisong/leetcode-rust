@@ -37,7 +37,10 @@ impl Solution {
 struct Solution {}
 
 fn main() {
-    let strs = vec!["fl".into(), "flow".into(), "flight".into()];
+    let strs: Vec<String> = vec!["fl", "flow", "flight"]
+        .into_iter()
+        .map(|it| it.into())
+        .collect();
     let res = Solution::longest_common_prefix(strs);
     println!("{}", res);
 }

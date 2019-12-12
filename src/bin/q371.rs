@@ -12,6 +12,12 @@
 //输出: 1
 // Related Topics 位运算
 
+#[cfg(test)]
+extern crate quickcheck;
+#[cfg(test)]
+#[macro_use(quickcheck)]
+extern crate quickcheck_macros;
+
 //leetcode submit region begin(Prohibit modification and deletion)
 impl Solution {
     pub fn get_sum(a: i32, b: i32) -> i32 {
@@ -31,21 +37,9 @@ struct Solution {}
 
 #[cfg(test)]
 mod tests {
-
-    use rstest::rstest_parametrize;
-
     use crate::Solution;
 
-    #[rstest_parametrize(
-        a,
-        b,
-        case(0, 0),
-        case(1, 1),
-        case(2, 1),
-        case(3, 2),
-        case(4, 3),
-        case(5, 5)
-    )]
+    #[quickcheck]
     fn test_sum(a: i32, b: i32) {
         let sum = Solution::get_sum(a, b);
         println!(" {} + {} = {}", a, b, sum);

@@ -129,7 +129,7 @@ impl LRUCache {
  * let ret_1: i32 = obj.get(key);
  * obj.put(key, value);
  */
-#[test]
+#[cfg(test)]
 mod tests {
     use crate::LRUCache;
 

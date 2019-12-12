@@ -33,6 +33,12 @@
  *
  *
  */
+#[cfg(test)]
+extern crate quickcheck;
+#[cfg(test)]
+#[macro_use(quickcheck)]
+extern crate quickcheck_macros;
+
 use std::collections::vec_deque::VecDeque;
 
 impl Solution {
@@ -126,29 +132,17 @@ fn main() {
 mod test {
     use crate::Solution;
 
-    #[test]
-    fn test1() {
-        let num1: u64 = 1122222;
-        let num2: u64 = 0;
-        assert_eq!(
-            0.to_string(),
-            Solution::multiply(num1.to_string(), num2.to_string())
-        )
-    }
+    #[quickcheck]
+    fn quickcheck_test(num1: u64, num2: u64) {
+        let result = Solution::multiply(num1.to_string(), num2.to_string());
+        println!("{} x {} = {:?}, {:?}", num1, num2, num1 * num2, result);
 
-    #[test]
-    fn test2() {
-        let num1: u64 = 1122222;
-        let num2: u64 = 454654;
-        assert_eq!(
-            (num1 * num2).to_string(),
-            Solution::multiply(num1.to_string(), num2.to_string())
-        )
+        assert_eq!((num1 * num2).to_string(), result)
     }
 
     #[test]
     #[should_panic]
-    fn test3() {
+    fn test_panic() {
         let num1: u64 = 1122222;
         let num2: u64 = 454654;
         assert_eq!(

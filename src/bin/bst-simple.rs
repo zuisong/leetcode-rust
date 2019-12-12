@@ -1,5 +1,11 @@
 #![feature(box_syntax)]
 
+#[cfg(test)]
+extern crate quickcheck;
+#[cfg(test)]
+#[macro_use(quickcheck)]
+extern crate quickcheck_macros;
+
 use std::cell::RefCell;
 use std::cmp::Ordering;
 use std::rc::Rc;
@@ -134,31 +140,34 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-
-    use rstest::rstest_parametrize;
+    use leetcode_rust::bst::BinarySearchTree;
+    use test_case::test_case;
 
     use crate::SimpleBinarySearchTree;
-    use leetcode_rust::bst::BinarySearchTree;
 
-    #[rstest_parametrize(
-        input,
-        expected,
-        case(0, 0),
-        case(1, 1),
-        case(2, 1),
-        case(3, 2),
-        case(4, 3),
-        case(5, 5)
-    )]
+    #[test_case(0, 0)]
+    #[test_case(1, 1)]
+    #[test_case(2, 1)]
+    #[test_case(3, 2)]
+    #[test_case(4, 3)]
+    #[test_case(5, 5)]
+    #[test_case(6, 8)]
+    #[test_case(7, 13)]
     fn fibonacci_test(input: u32, expected: u32) {
         let _a = 0;
         fn fibonacci(n: u32) -> u32 {
+            if n >= 30 {
+                return 0;
+            }
+
             match n {
                 0 => 0,
                 1 => 1,
                 _ => fibonacci(n - 1) + fibonacci(n - 2),
             }
         }
+        println!("{} --> {}", input, fibonacci(input));
+
         assert_eq!(expected, fibonacci(input))
     }
 

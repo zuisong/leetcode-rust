@@ -14,8 +14,6 @@
 //]
 // Related Topics 回溯算法
 
-
-
 //leetcode submit region begin(Prohibit modification and deletion)
 impl Solution {
     pub fn permute(nums: Vec<i32>) -> Vec<Vec<i32>> {

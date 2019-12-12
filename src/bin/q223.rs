@@ -44,6 +44,4 @@ impl Solution {
 
 struct Solution {}
 
-fn main() {
-
-}
+fn main() {}

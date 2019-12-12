@@ -9,9 +9,9 @@ fn main() {
     rand::thread_rng().fill(&mut arr[..]);
     //    dbg!(&arr);
     let time1 = std::time::Instant::now();
-    let res1 = solve1(&arr, target);
+    let _res1 = solve1(&arr, target);
     let time2 = std::time::Instant::now();
-    let res2 = solve2(&arr, target);
+    let _res2 = solve2(&arr, target);
     let time3 = std::time::Instant::now();
 
     println!("{:?}", time2 - time1);

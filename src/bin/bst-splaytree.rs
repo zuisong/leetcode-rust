@@ -136,6 +136,4 @@
 //    dbg!(&tree);
 //    assert_eq!(true, tree.find(2));
 //}
-fn main() {
-
-}
+fn main() {}

@@ -1,4 +1,4 @@
-use std::sync::mpsc::channel;
+
 
 // https://leetcode-cn.com/problems/maximal-rectangle/
 // 解法 https://segmentfault.com/a/1190000003498304

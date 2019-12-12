@@ -28,7 +28,7 @@ impl Solution {
             result = result.max(
                 heights[idx]
                     * (heights.len() as i32 - 1 - stack.last().map(|it| *it as i32).unwrap_or(-1))
-                    as i32,
+                        as i32,
             );
         }
 

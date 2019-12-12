@@ -4,7 +4,7 @@ use std::cell::RefCell;
 use std::cmp::Ordering;
 use std::rc::Rc;
 
-use leetcode_rust::bst::{BinarySearchTree};
+use leetcode_rust::bst::BinarySearchTree;
 
 // Definition for a binary tree node.
 #[derive(Debug, PartialEq, Eq)]
@@ -74,12 +74,10 @@ impl BinarySearchTree for SimpleBinarySearchTree {
                                 let n = node.as_mut().unwrap();
 
                                 if n.borrow_mut().left.is_none() {
-                                    let right =
-                                        std::mem::replace(&mut n.borrow_mut().right, None);
+                                    let right = std::mem::replace(&mut n.borrow_mut().right, None);
                                     std::mem::replace(node, right);
                                 } else if n.borrow_mut().right.is_none() {
-                                    let left =
-                                        std::mem::replace(&mut n.borrow_mut().left, None);
+                                    let left = std::mem::replace(&mut n.borrow_mut().left, None);
                                     std::mem::replace(node, left);
                                 } else {
                                     let i = n.borrow().left.as_ref().unwrap().borrow().val;
@@ -136,24 +134,24 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use rstest::rstest;
+
     use rstest::rstest_parametrize;
 
     use crate::SimpleBinarySearchTree;
     use leetcode_rust::bst::BinarySearchTree;
 
     #[rstest_parametrize(
-    input,
-    expected,
-    case(0, 0),
-    case(1, 1),
-    case(2, 1),
-    case(3, 2),
-    case(4, 3),
-    case(5, 5)
+        input,
+        expected,
+        case(0, 0),
+        case(1, 1),
+        case(2, 1),
+        case(3, 2),
+        case(4, 3),
+        case(5, 5)
     )]
     fn fibonacci_test(input: u32, expected: u32) {
-        let mut a = 0;
+        let _a = 0;
         fn fibonacci(n: u32) -> u32 {
             match n {
                 0 => 0,

@@ -79,7 +79,7 @@ fn main() {
     let mut l3 = ListNode::new(2);
     let mut l4 = ListNode::new(4);
     let mut l5 = ListNode::new(4);
-    let mut l6 = ListNode::new(6);
+    let l6 = ListNode::new(6);
     l5.next = Some(Box::new(l6));
     l4.next = Some(Box::new(l5));
     l3.next = Some(Box::new(l4));

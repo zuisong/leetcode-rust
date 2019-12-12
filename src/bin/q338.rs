@@ -19,8 +19,6 @@
 //
 // Related Topics 位运算 动态规划
 
-
-
 //leetcode submit region begin(Prohibit modification and deletion)
 impl Solution {
     pub fn count_bits(num: i32) -> Vec<i32> {

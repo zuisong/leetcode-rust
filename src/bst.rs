@@ -1,6 +1,3 @@
-#![feature(box_syntax)]
-
-
 pub trait BinarySearchTree: std::fmt::Debug {
     fn add(&mut self, item: i32) -> Result<(), &str>;
     fn remove(&mut self, item: i32) -> bool;

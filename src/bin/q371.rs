@@ -12,8 +12,6 @@
 //输出: 1
 // Related Topics 位运算
 
-
-
 //leetcode submit region begin(Prohibit modification and deletion)
 impl Solution {
     pub fn get_sum(a: i32, b: i32) -> i32 {
@@ -33,20 +31,20 @@ struct Solution {}
 
 #[cfg(test)]
 mod tests {
-    use rstest::rstest;
+
     use rstest::rstest_parametrize;
 
     use crate::Solution;
 
     #[rstest_parametrize(
-    a,
-    b,
-    case(0, 0),
-    case(1, 1),
-    case(2, 1),
-    case(3, 2),
-    case(4, 3),
-    case(5, 5)
+        a,
+        b,
+        case(0, 0),
+        case(1, 1),
+        case(2, 1),
+        case(3, 2),
+        case(4, 3),
+        case(5, 5)
     )]
     fn test_sum(a: i32, b: i32) {
         let sum = Solution::get_sum(a, b);
@@ -58,6 +56,4 @@ mod tests {
     fn test() {}
 }
 
-fn main() {
-
-}
+fn main() {}

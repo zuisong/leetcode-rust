@@ -1,14 +1,14 @@
-//给定一个二叉树，原地将它展开为链表。 
+//给定一个二叉树，原地将它展开为链表。
 //
-// 例如，给定二叉树 
+// 例如，给定二叉树
 //
 //     1
 //   / \
 //  2   5
 // / \   \
-//3   4   6 
+//3   4   6
 //
-// 将其展开为： 
+// 将其展开为：
 //
 // 1
 // \
@@ -20,7 +20,7 @@
 //       \
 //        5
 //         \
-//          6 
+//          6
 // Related Topics 树 深度优先搜索
 
 use std::cell::RefCell;
@@ -47,15 +47,10 @@ impl TreeNode {
 //leetcode submit region begin(Prohibit modification and deletion)
 
 impl Solution {
-    pub fn flatten(root: &mut Option<Rc<RefCell<TreeNode>>>) {
-
-
-    }
+    pub fn flatten(_root: &mut Option<Rc<RefCell<TreeNode>>>) {}
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
 struct Solution {}
 
-fn main() {
-
-}
+fn main() {}

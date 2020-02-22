@@ -4,9 +4,7 @@
 //use std::cmp::Ordering;
 //use std::rc::Rc;
 //
-//use crate::bst::*;
-//
-//pub mod bst;
+//use leetcode_rust::bst::*;
 //
 //// Definition for a binary tree node.
 //#[derive(Debug, PartialEq, Eq)]
@@ -136,4 +134,6 @@
 //    dbg!(&tree);
 //    assert_eq!(true, tree.find(2));
 //}
+//
+
 fn main() {}

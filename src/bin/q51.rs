@@ -108,7 +108,7 @@ fn main() {
     info!("{}", result.len());
 
     for (idx, res) in result.iter().enumerate() {
-        info!("===== {}", idx + 1);
+        info!("--> {}", idx + 1);
         for r in res {
             info!("{}", r);
         }

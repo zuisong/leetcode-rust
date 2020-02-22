@@ -59,7 +59,7 @@ fn main() {
         dbg!(res);
     }
     check("010010");
-    check("11111111");
+    check("192168102");
 }
 
 struct Solution {}

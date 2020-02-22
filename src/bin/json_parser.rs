@@ -218,20 +218,20 @@ fn parse(json: String) -> Result<JsonNode, failure::Error> {
 }
 
 fn main() -> Result<(), failure::Error> {
+    //language=JSON
     let res = parse(
         r#"
 {
-    c: -11.1,
-    d: [
+    "c": -11.1,
+    "d": [
         1,
         {
-            f: 'ggga',
-            g: {
-                c: -11,
-                d: [
-                    1,
-                    {
-                        f: 'gg"ga'
+            "f": "ggga",
+            "g": {
+                "c": -11,
+                "d": [
+                    1, {
+                        "f": "gg       \nga"
                     }
                 ]
             }

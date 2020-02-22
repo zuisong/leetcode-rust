@@ -58,8 +58,9 @@ fn main() {
         .collect();
 
     let res = Solution::group_anagrams(v);
-
-    println!("{:?}", res);
+    res.iter().for_each(|it| {
+        println!("{:?}", it);
+    })
 }
 
 struct Solution {}

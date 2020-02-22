@@ -153,6 +153,7 @@ mod tests {
     #[test_case(5, 5)]
     #[test_case(6, 8)]
     #[test_case(7, 13)]
+    #[test_case(8, 21)]
     fn fibonacci_test(input: u32, expected: u32) {
         let _a = 0;
         fn fibonacci(n: u32) -> u32 {

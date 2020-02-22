@@ -19,8 +19,6 @@
 //
 // Related Topics 排序 数组 双指针
 
-
-
 //leetcode submit region begin(Prohibit modification and deletion)
 impl Solution {
     pub fn sort_colors(nums: &mut Vec<i32>) {
@@ -43,36 +41,33 @@ impl Solution {
                 1 => {
                     idx += 1;
                 }
-                2 => {
-                    match nums[idx_2] {
-                        0 => {
-                            nums[idx_2] = 2;
-                            idx_2 -= 1;
+                2 => match nums[idx_2] {
+                    0 => {
+                        nums[idx_2] = 2;
+                        idx_2 -= 1;
 
-                            nums[idx] = 1;
+                        nums[idx] = 1;
 
-                            nums[idx_0] = 0;
-                            idx_0 += 1;
+                        nums[idx_0] = 0;
+                        idx_0 += 1;
 
-
-                            idx += 1;
-                        }
-                        1 => {
-                            nums[idx_2] = 2;
-                            idx_2 -= 1;
-                            nums[idx] = 1;
-                            idx += 1;
-                        }
-                        2 => {
-                            if idx_2 <= 0 {
-                                break;
-                            }
-                            idx_2 -= 1;
-                        }
-                        _ => unreachable!()
+                        idx += 1;
                     }
-                }
-                _ => unreachable!()
+                    1 => {
+                        nums[idx_2] = 2;
+                        idx_2 -= 1;
+                        nums[idx] = 1;
+                        idx += 1;
+                    }
+                    2 => {
+                        if idx_2 <= 0 {
+                            break;
+                        }
+                        idx_2 -= 1;
+                    }
+                    _ => unreachable!(),
+                },
+                _ => unreachable!(),
             }
         }
     }
@@ -87,7 +82,7 @@ impl Solution {
                 0 => count_0 += 1,
                 1 => count_1 += 1,
                 2 => count_2 += 1,
-                _ => unreachable!()
+                _ => unreachable!(),
             }
         }
 
@@ -111,7 +106,6 @@ struct Solution {}
 fn main() {
     let mut nums = vec![2, 0, 1];
     nums = vec![2, 0, 2, 1, 1, 0];
-//    nums = vec![2];
 
     let mut res = nums.clone();
 

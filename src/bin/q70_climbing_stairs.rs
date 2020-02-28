@@ -35,7 +35,6 @@ impl Solution {
 
             dbg!(&i);
             dbg!(&res);
-            dbg!(&a);
         }
 
         return res;

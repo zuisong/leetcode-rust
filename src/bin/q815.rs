@@ -23,7 +23,6 @@
 //
 // Related Topics 广度优先搜索
 
-
 //leetcode submit region begin(Prohibit modification and deletion)
 impl Solution {
     pub fn num_buses_to_destination(routes: Vec<Vec<i32>>, s: i32, t: i32) -> i32 {

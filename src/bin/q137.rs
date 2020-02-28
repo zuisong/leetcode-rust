@@ -23,7 +23,7 @@ impl Solution {
     pub fn single_number(nums: Vec<i32>) -> i32 {
         let mut one = 0; // 某位为1表示该位出现了1次
         let mut two = 0; // 某位为1表示该位出现了2次
-        nums.into_iter().for_each(|num| {
+        for num in nums {
             //  one & num   上一轮的one 和 num 同时为1  &后为1的位则表示 哪些位需要从1位变为2位
             two |= one & num;
             // 新一轮的one 应该是 上一轮的one 和 num 不同时为 1 的位，因为同时为1的位已经被上一行统计过了
@@ -33,14 +33,14 @@ impl Solution {
             // 将出现了三次的位置0
             one &= !three;
             two &= !three;
-        });
+        }
         assert_eq!(two, 0);
         one
     }
 }
 
 fn main() {
-    let data = vec![0, 1, 0, 1, 0, 1, 100000];
+    let data = vec![0, 1, 0, 1, 0, 1, 7];
 
     let res = Solution::single_number(data);
     dbg!(res);

@@ -1,5 +1,37 @@
 #[macro_use]
 extern crate lazy_static;
+#[cfg(test)]
+extern crate quickcheck;
+#[cfg(test)]
+#[macro_use(quickcheck)]
+extern crate quickcheck_macros;
+
+#[cfg(test)]
+mod tests {
+    use log::*;
+
+    use crate::{decode_base64, encode_base64};
+    use leetcode_rust::init_logger;
+
+    #[quickcheck]
+    fn quickcheck_base64(s: String) {
+        init_logger();
+
+        if s.is_empty() {
+            return;
+        }
+        let s = &s;
+        let base64_encoded = base64::encode(s);
+        let my_encodeed = encode_base64(s.as_ref());
+        warn!("{:?}", s);
+
+        assert_eq!(base64_encoded, my_encodeed);
+
+        let res = decode_base64(&base64_encoded);
+        let res = String::from_utf8(res).unwrap();
+        assert_eq!(&res, s);
+    }
+}
 
 fn main() {
     let word = "chenjian";
@@ -87,8 +119,8 @@ fn encode_base64(data: &[u8]) -> String {
             j += 1;
         };
     }
-    res.iter().for_each(|it| print!("{:06b} ", it));
-    println!();
+    // res.iter().for_each(|it| print!("{:06b} ", it));
+    // println!();
     let mut res: Vec<u8> = res.iter().map(|it| BASE64_ALPHABET[*it as usize]).collect();
     let n = len % 3;
     let len = res.len();
@@ -99,10 +131,10 @@ fn encode_base64(data: &[u8]) -> String {
     if n == 2 {
         res[len - 1] = b'=';
     };
-    return String::from_utf8(res).unwrap();
+    String::from_utf8(res).unwrap()
 }
 
-fn decode_base64(base64_str: &String) -> Vec<u8> {
+fn decode_base64(base64_str: &str) -> Vec<u8> {
     if base64_str.is_empty() {
         return vec![];
     }

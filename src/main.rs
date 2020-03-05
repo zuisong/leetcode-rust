@@ -1,10 +1,5 @@
+use leetcode_rust::init_logger;
 use log::*;
-
-fn init_logger() {
-    env_logger::Builder::default()
-        .filter_level(LevelFilter::Debug)
-        .init();
-}
 
 fn main() {
     init_logger();

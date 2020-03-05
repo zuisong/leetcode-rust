@@ -42,6 +42,7 @@
 
 extern crate log;
 
+use leetcode_rust::init_logger;
 use log::*;
 
 struct Solution {}
@@ -100,9 +101,8 @@ impl Solution {
 }
 
 fn main() {
-    env_logger::Builder::default()
-        .filter_level(LevelFilter::Debug)
-        .init();
+    init_logger();
+
     let result = Solution::solve_n_queens(8);
 
     info!("{}", result.len());

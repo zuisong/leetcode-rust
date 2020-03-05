@@ -1,5 +1,6 @@
 extern crate log;
 
+use leetcode_rust::init_logger;
 use log::*;
 
 struct Solution {}
@@ -71,9 +72,7 @@ impl Solution {
 }
 
 fn main() {
-    env_logger::Builder::default()
-        .filter_level(LevelFilter::Debug)
-        .init();
+    init_logger();
 
     let mut board: Vec<Vec<char>> = vec![
         vec!['5', '3', '.', '.', '7', '.', '.', '.', '.'],

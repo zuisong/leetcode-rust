@@ -68,6 +68,22 @@ impl BinarySearchTree for SimpleBinarySearchTree {
     }
 
     fn remove(&mut self, item: i32) -> bool {
+        fn remove_node(node: &mut Option<Rc<RefCell<TreeNode>>>) {
+            let n = node.as_mut().unwrap();
+
+            if n.borrow_mut().left.is_none() {
+                let right = std::mem::replace(&mut n.borrow_mut().right, None);
+                std::mem::replace(node, right);
+            } else if n.borrow_mut().right.is_none() {
+                let left = std::mem::replace(&mut n.borrow_mut().left, None);
+                std::mem::replace(node, left);
+            } else {
+                let i = n.borrow().left.as_ref().unwrap().borrow().val;
+                n.borrow_mut().val = i;
+                remove_node(&mut n.borrow_mut().left);
+            }
+        }
+
         fn remove(node: &mut Option<Rc<RefCell<TreeNode>>>, val: i32) -> bool {
             match node {
                 Some(n) => {
@@ -76,21 +92,6 @@ impl BinarySearchTree for SimpleBinarySearchTree {
                         Ordering::Less => remove(&mut n.borrow_mut().right, val),
                         Ordering::Greater => remove(&mut n.borrow_mut().left, val),
                         Ordering::Equal => {
-                            fn remove_node(node: &mut Option<Rc<RefCell<TreeNode>>>) {
-                                let n = node.as_mut().unwrap();
-
-                                if n.borrow_mut().left.is_none() {
-                                    let right = std::mem::replace(&mut n.borrow_mut().right, None);
-                                    std::mem::replace(node, right);
-                                } else if n.borrow_mut().right.is_none() {
-                                    let left = std::mem::replace(&mut n.borrow_mut().left, None);
-                                    std::mem::replace(node, left);
-                                } else {
-                                    let i = n.borrow().left.as_ref().unwrap().borrow().val;
-                                    n.borrow_mut().val = i;
-                                    remove_node(&mut n.borrow_mut().left);
-                                }
-                            }
                             remove_node(node);
                             true
                         }

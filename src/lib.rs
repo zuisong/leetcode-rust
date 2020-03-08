@@ -1,7 +1,6 @@
 #![feature(box_syntax)]
 
-use log::Level::{Debug, Info};
-use log::LevelFilter;
+use log::Level::*;
 
 pub mod bst;
 

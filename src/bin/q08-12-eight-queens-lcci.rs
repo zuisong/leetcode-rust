@@ -60,8 +60,8 @@ impl Solution {
 
                 // 遍历已经填的数字
                 for j in 0..i {
-                    if v[j] == v[i]
-                        || (v[j] as i32 - v[i] as i32).pow(2) == (i as i32 - j as i32).pow(2)
+                    if (v[j] as i32 - v[i] as i32).pow(2) == (i as i32 - j as i32).pow(2)
+                        || v[j] == v[i]
                     {
                         checked = false;
                         break;

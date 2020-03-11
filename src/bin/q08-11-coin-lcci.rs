@@ -29,7 +29,7 @@
 impl Solution {
     pub fn ways_to_change(n: i32) -> i32 {
         let n = n as usize;
-        let mut dp = vec![0; (n + 1)];
+        let mut dp = vec![0; 1 + n];
         dp[0] = 1;
         for i in vec![1, 5, 10, 25] {
             for idx in 1..=n {

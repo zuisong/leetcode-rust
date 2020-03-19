@@ -37,27 +37,21 @@ impl Solution {
         fn solve(v: &mut Vec<usize>, i: usize, result: &mut Vec<Vec<String>>) {
             let n = v.len();
             if i == v.len() {
-                // dbg!(&v);
-
                 let mut mat = vec![];
                 for x in v {
-                    let mut res = vec![b'.'; n];
-                    res[*x] = b'Q';
-                    mat.push(String::from_utf8(res).unwrap());
+                    let mut res = vec!["."; n];
+                    res[*x] = "Q";
+                    mat.push((res).join(""));
                 }
-                // dbg!(&mat);
-
                 result.push(mat);
                 return;
             }
 
-            //
             // 遍历可以填的数字
             for x in 0..v.len() {
                 //假装填入数字
                 v[i] = x;
                 let mut checked = true;
-
                 // 遍历已经填的数字
                 for j in 0..i {
                     if (v[j] as i32 - v[i] as i32).pow(2) == (i as i32 - j as i32).pow(2)
@@ -74,16 +68,14 @@ impl Solution {
                 v[i] = 0;
             }
         }
-        //
-
         solve(&mut v, 0, &mut result);
-
         return result;
     }
 }
 
 fn main() {
     let res = Solution::solve_n_queens(8);
+
     dbg!(&res);
     dbg!(&res.len());
 }

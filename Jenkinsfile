@@ -19,9 +19,8 @@ pipeline {
         echo '构建中...'
         sh ' echo $PWD  '
         sh ' ls -lR  '
-        sh ' cargo build '
+        sh ' cargo test '
         echo ' 构建完成... '
-        archiveArtifacts(artifacts: 'build/**/*.jar', fingerprint: true)
       }
     }
   }

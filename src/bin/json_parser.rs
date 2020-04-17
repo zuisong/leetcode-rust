@@ -19,7 +19,7 @@ enum Token {
     COMMA,
 }
 
-fn tokenlizer(json: String) -> Result<Vec<Token>, failure::Error> {
+fn tokenlizer(json: String) -> Result<Vec<Token>, anyhow::Error> {
     let mut tokens = vec![];
 
     let chars: Vec<_> = json.chars().collect();
@@ -209,7 +209,7 @@ fn generate_ast(tokens: Vec<Token>) -> JsonNode {
     get_node(0, &tokens).1
 }
 
-fn parse(json: String) -> Result<JsonNode, failure::Error> {
+fn parse(json: String) -> Result<JsonNode, anyhow::Error> {
     println!("{:?}", json);
 
     let tokens: Vec<Token> = tokenlizer(json)?;
@@ -217,7 +217,7 @@ fn parse(json: String) -> Result<JsonNode, failure::Error> {
     Ok(generate_ast(tokens))
 }
 
-fn main() -> Result<(), failure::Error> {
+fn main() -> Result<(), anyhow::Error> {
     //language=JSON
     let res = parse(
         r#"

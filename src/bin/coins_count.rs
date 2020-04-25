@@ -7,6 +7,7 @@ fn main() {
         func1(i);
         println!();
         func2(i);
+        println!();
         println!("===");
     }
 }
@@ -23,8 +24,10 @@ fn func1(target: usize) {
         }
     }
     let end = Instant::now();
-    println!("结果 {}", table[target]);
-    println!("运行时间 {:?}", end - start);
+    let res = table[target];
+
+    println!("程序运行时间是 --> {:?}", end - start);
+    println!("共有 {} 种可能性", res);
 }
 
 use std::collections::HashMap;

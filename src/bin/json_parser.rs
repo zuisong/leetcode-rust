@@ -171,17 +171,13 @@ fn generate_ast(tokens: Vec<Token>) -> JsonNode {
         if tokens[i] == Token::LBig {
             i += 1;
             let mut map = HashMap::new();
-            loop {
-                if let Token::Str(name) = &tokens[i] {
-                    i += 2;
-                    let (idx, node) = get_node(i, tokens);
-                    map.insert(name.clone(), node);
-                    i = idx;
-                    if tokens[i] == Token::COMMA {
-                        i += 1;
-                    }
-                } else {
-                    break;
+            while let Token::Str(name) = &tokens[i] {
+                i += 2;
+                let (idx, node) = get_node(i, tokens);
+                map.insert(name.clone(), node);
+                i = idx;
+                if tokens[i] == Token::COMMA {
+                    i += 1;
                 }
             }
             return (i + 1, JsonNode::Object(map));

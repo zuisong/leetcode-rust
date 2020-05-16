@@ -10,7 +10,7 @@ fn main() {
         vec![1, 2, 4, 15],
         vec![6, 7, 3, 14],
         vec![5, 11, 8, 13],
-        vec![10, 9, 12, 0]
+        vec![10, 9, 12, 0],
     ];
 
     let target = vec![
@@ -19,12 +19,7 @@ fn main() {
         vec![9, 10, 11, 12],
         vec![13, 14, 15, 0],
     ];
-    // let target = vec![
-    //     vec![1, 2, 3, 4],
-    //     vec![5, 6, 7, 8],
-    //     vec![9, 10, 11, 12],
-    //     vec![13, 14, 15, 0],
-    // ];
+
     let mut pos0 = (0, 0);
     for (x, v) in res.iter().enumerate() {
         for (y, val) in v.iter().enumerate() {
@@ -38,11 +33,7 @@ fn main() {
     solve(res, hash(&target), pos0);
 }
 
-fn solve(
-    matrix: Vec<Vec<i32>>,
-    target_hash: String,
-    pos0: (i32, i32),
-) {
+fn solve(matrix: Vec<Vec<i32>>, target_hash: String, pos0: (i32, i32)) {
     let len_y = matrix.first().unwrap().len() as i32;
     let len_x = matrix.len() as i32;
     // map.remove(&hash_temp);
@@ -88,8 +79,7 @@ fn solve(
             while map.contains_key(&h) {
                 dbg!(&h);
 
-                let temp = map.get(&h)
-                    .unwrap_or(&(String::from(""), (0, 0))).1;
+                let temp = map.get(&h).unwrap_or(&(String::from(""), (0, 0))).1;
                 println!("{:?}", temp);
                 let step = match temp {
                     (0, 1) => "右",

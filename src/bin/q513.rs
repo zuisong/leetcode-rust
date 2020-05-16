@@ -70,12 +70,13 @@ pub fn find_bottom_left_value(
             let right = find_bottom_left_value(&n.borrow().right, level + 1);
 
             let res = match (left, right) {
-                (Some(l), Some(r)) =>
+                (Some(l), Some(r)) => {
                     if l.1 >= r.1 {
                         l
                     } else {
                         r
-                    },
+                    }
+                }
                 (Some(l), None) => l,
                 (None, Some(r)) => r,
                 (None, None) => (n.borrow().val, level),
@@ -95,3 +96,5 @@ impl Solution {
 //leetcode submit region end(Prohibit modification and deletion)
 
 fn main() {}
+
+struct Solution {}

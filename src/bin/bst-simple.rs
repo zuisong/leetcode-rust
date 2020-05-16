@@ -1,11 +1,5 @@
 #![feature(box_syntax)]
 
-#[cfg(test)]
-extern crate quickcheck;
-#[cfg(test)]
-#[macro_use(quickcheck)]
-extern crate quickcheck_macros;
-
 use std::cell::RefCell;
 use std::cmp::Ordering;
 use std::rc::Rc;

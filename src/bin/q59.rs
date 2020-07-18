@@ -84,7 +84,7 @@ fn main() {
     //    dbg!(&res);
 
     res.iter().for_each(|r| {
-        r.iter().for_each(|x| print!("{: >5}", x));
+        r.iter().for_each(|x| print!("{: >4}", x));
         println!();
     });
 }

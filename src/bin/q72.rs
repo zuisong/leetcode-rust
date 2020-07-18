@@ -11,7 +11,7 @@
  * Total Submissions: 9.4K
  * Testcase Example:  '"horse"\n"ros"'
  *
- * 给定两个单词 word1 和 word2，计算出将 word1 转换成 word2 所使用的最少操作数 。
+ * 给定两个单词 word1 和 word2，计算出将 word1 转换成 word2 所使用的最少操作数 。
  *
  * 你可以对一个单词进行如下三种操作：
  *
@@ -21,7 +21,7 @@
  * 替换一个字符
  *
  *
- * 示例 1:
+ * 示例 1:
  *
  * 输入: word1 = "horse", word2 = "ros"
  * 输出: 3
@@ -31,7 +31,7 @@
  * rose -> ros (删除 'e')
  *
  *
- * 示例 2:
+ * 示例 2:
  *
  * 输入: word1 = "intention", word2 = "execution"
  * 输出: 5

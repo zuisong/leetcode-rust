@@ -11,7 +11,7 @@
  * Total Submissions: 48.5K
  * Testcase Example:  '10'
  *
- * 统计所有小于非负整数 n 的质数的数量。
+ * 统计所有小于非负整数 n 的质数的数量。
  *
  * 示例:
  *

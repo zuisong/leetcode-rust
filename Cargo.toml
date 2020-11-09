@@ -6,15 +6,15 @@ edition = "2018"
 
 [dependencies]
 log= "0.4.11"
-chrono = "0.4.13"
+chrono = "0.4.19"
 lazy_static = "1.4.0"
 rand = "0.7.3"
-simple_logger = "1.6.0"
-serde_json = "1.0.56"
-anyhow = "1.0.31"
+simple_logger = "1.11.0"
+serde_json = "1.0.59"
+anyhow = "1.0.33"
 
 [dev-dependencies]
-base64 = "0.12.3"
+base64 = "0.13.0"
 test-case = "1.0.0"
 quickcheck = "0.9.2"
 quickcheck_macros = "0.9.1"

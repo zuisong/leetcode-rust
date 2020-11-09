@@ -18,9 +18,9 @@
  * 输入: ["eat", "tea", "tan", "ate", "nat", "bat"],
  * 输出:
  * [
- * ⁠ ["ate","eat","tea"],
- * ⁠ ["nat","tan"],
- * ⁠ ["bat"]
+ *  ["ate","eat","tea"],
+ *  ["nat","tan"],
+ *  ["bat"]
  * ]
  *
  * 说明：

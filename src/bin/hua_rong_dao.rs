@@ -1,10 +1,10 @@
 use std::collections::{HashMap, VecDeque};
 use std::process::exit;
 
-use log::info;
+
 
 fn main() {
-    simple_logger::init();
+    simple_logger::SimpleLogger::new().init().unwrap();
 
     let res = vec![
         vec![1, 2, 4, 15],

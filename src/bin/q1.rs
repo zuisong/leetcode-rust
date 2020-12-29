@@ -5,7 +5,7 @@ use rand::Rng;
 fn main() {
     let n = 10000;
     let mut arr: Vec<_> = vec![0i32; n as usize];
-    let target = rand::thread_rng().gen_range(0, n);
+    let target = rand::thread_rng().gen_range(0..n);
     rand::thread_rng().fill(&mut arr[..]);
     //    dbg!(&arr);
     let time1 = std::time::Instant::now();

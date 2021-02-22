@@ -2,7 +2,7 @@
 //
 // 例如，
 //
-//     1 -> A
+//    1 -> A
 //    2 -> B
 //    3 -> C
 //    ...
@@ -33,27 +33,25 @@
 
 impl Solution {
     pub fn convert_to_title(n: i32) -> String {
-        use core::fmt::Write;
         if n <= 26 {
             let mut s = String::new();
             if n > 0 {
-                s.write_char(char::from(b'A' - 1 + n as u8)).unwrap();
+                s.push(char::from(b'A' - 1 + n as u8));
             }
             s.shrink_to_fit();
             return s;
         } else {
-            let mut s = String::new();
+            let mut str = String::new();
             let i = n % 26;
             if i == 0 {
-                s.write_str(Self::convert_to_title(n / 26 - 1).as_ref())
-                    .unwrap();
-                s.write_str(Self::convert_to_title(26).as_ref()).unwrap();
+                str.push_str(Self::convert_to_title(n / 26 - 1).as_str());
+                str.push_str(Self::convert_to_title(26).as_str());
             } else {
-                s.write_str(Self::convert_to_title(n / 26).as_ref())
-                    .unwrap();
-                s.write_str(Self::convert_to_title(i).as_ref()).unwrap();
+                str.push_str(Self::convert_to_title(n / 26).as_str());
+                str.push_str(Self::convert_to_title(i).as_str());
             }
-            return s;
+            str.shrink_to_fit();
+            return str;
         }
     }
 }

@@ -1,5 +1,6 @@
-use leetcode_rust::init_logger;
 use log::*;
+
+use leetcode_rust::init_logger;
 
 fn main() {
     init_logger();
@@ -8,7 +9,8 @@ fn main() {
 
     info!("23456");
 
-    info!("Hello World, {}", d(1000));
+    let d1: i32 = d(1000);
+    info!("Hello World, {}", d1);
 }
 
 fn f1() -> Box<dyn Fn(i32) -> i32> {

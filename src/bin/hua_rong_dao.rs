@@ -1,8 +1,6 @@
 use std::collections::{HashMap, VecDeque};
 use std::process::exit;
 
-
-
 fn main() {
     simple_logger::SimpleLogger::new().init().unwrap();
 

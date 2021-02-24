@@ -65,7 +65,7 @@ impl Solution {
 
                 std::cmp::max(left_depth, right_depth) + 1
             }
-            None => 0
+            None => 0,
         }
     }
 }

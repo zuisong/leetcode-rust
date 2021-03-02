@@ -1,3 +1,4 @@
+use std::borrow::Borrow;
 use std::cell::RefCell;
 use std::rc::Rc;
 
@@ -66,10 +67,10 @@ impl TreeNode {
 
 impl Solution {
     pub fn build_tree(preorder: Vec<i32>, inorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
-        return Self::build_tree2(preorder.as_slice(), inorder.as_slice());
+        return Self::helper(preorder.borrow(), inorder.borrow());
     }
 
-    pub fn build_tree2(preorder: &[i32], inorder: &[i32]) -> Option<Rc<RefCell<TreeNode>>> {
+    pub fn helper(preorder: &[i32], inorder: &[i32]) -> Option<Rc<RefCell<TreeNode>>> {
         if preorder.len() != inorder.len() {
             unreachable!();
         }
@@ -94,8 +95,8 @@ impl Solution {
         let left_inorder = &inorder[0..mid];
         let right_inorder = &inorder[(mid + 1)..inorder.len()];
 
-        let left_node = Self::build_tree2(left_preorder, left_inorder);
-        let right_node = Self::build_tree2(right_preorder, right_inorder);
+        let left_node = Self::helper(left_preorder, left_inorder);
+        let right_node = Self::helper(right_preorder, right_inorder);
 
         let mut tree_node = TreeNode::new(first_val);
         tree_node.left = left_node;

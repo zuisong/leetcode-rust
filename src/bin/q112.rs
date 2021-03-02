@@ -41,22 +41,22 @@ impl TreeNode {
 }
 
 impl Solution {
-    fn has_path_sum2(node: &Option<Rc<RefCell<TreeNode>>>, sum: i32) -> bool {
-        if node.is_none() && sum == 0 {
-            return true;
-        }
+    fn helper(node: &Option<Rc<RefCell<TreeNode>>>, sum: i32) -> bool {
         match node {
             None => false,
             Some(n) => {
-                let new_target = n.borrow().val - sum;
-                Self::has_path_sum2(&n.borrow().left, new_target)
-                    || Self::has_path_sum2(&n.borrow().right, new_target)
+                let n = n.borrow();
+                if n.right.is_none() && n.left.is_none() && n.val == sum {
+                    return true;
+                }
+                let new_target = sum - n.val;
+                Self::helper(&n.left, new_target) || Self::helper(&n.right, new_target)
             }
         }
     }
 
     pub fn has_path_sum(root: Option<Rc<RefCell<TreeNode>>>, sum: i32) -> bool {
-        Self::has_path_sum2(&root, sum)
+        Self::helper(&root, sum)
     }
 }
 

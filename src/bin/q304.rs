@@ -37,19 +37,19 @@ struct NumMatrix {
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl NumMatrix {
-    fn new(mut matrix: Vec<Vec<i32>>) -> Self {
+    fn new(matrix: Vec<Vec<i32>>) -> Self {
         let row_len = matrix.len();
         let col_len = matrix[0].len();
 
-        for row in 1..row_len {
-            for col in 1..col_len {}
+        for _row in 1..row_len {
+            for _col in 1..col_len {}
         }
 
-        return NumMatrix { sum_matrix: matrix };
+        NumMatrix { sum_matrix: matrix }
     }
 
-    fn sum_region(&self, row1: i32, col1: i32, row2: i32, col2: i32) -> i32 {
-        return 0;
+    fn sum_region(&self, _row1: i32, _col1: i32, _row2: i32, _col2: i32) -> i32 {
+        0
     }
 }
 

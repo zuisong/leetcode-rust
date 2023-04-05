@@ -38,7 +38,7 @@ impl Solution {
             if ve[i] {
                 result += 1;
                 //                dbg!(&i);
-                let mut num: usize = i as usize;
+                let mut num: usize = i;
                 while num < n {
                     ve[num] = false;
                     num += i;

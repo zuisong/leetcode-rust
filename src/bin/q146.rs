@@ -94,7 +94,7 @@ impl LRUCache {
                 let head = self.head.clone().unwrap();
                 let new_head = head.borrow().next.clone();
                 self.head = new_head.clone();
-                new_head.clone().unwrap().borrow_mut().prev = None;
+                new_head.unwrap().borrow_mut().prev = None;
                 self.m.remove(&head.borrow().key);
             }
         }
@@ -109,14 +109,14 @@ impl LRUCache {
             match self.tail.clone() {
                 None => {
                     self.head = Some(node.clone());
-                    self.tail = Some(node.clone());
+                    self.tail = Some(node);
                 }
                 // 新添加的数据放到链表的末尾
                 Some(tail) => {
-                    node.clone().borrow_mut().prev = Some(tail.clone());
-                    node.clone().borrow_mut().next = None;
-                    tail.clone().borrow_mut().next = Some(node.clone());
-                    self.tail = Some(node.clone());
+                    node.borrow_mut().prev = Some(tail.clone());
+                    node.borrow_mut().next = None;
+                    tail.borrow_mut().next = Some(node.clone());
+                    self.tail = Some(node);
                 }
             }
         }

@@ -74,7 +74,7 @@ impl Solution {
             };
         }
 
-        return matrix;
+        matrix
     }
 }
 

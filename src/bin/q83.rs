@@ -59,13 +59,11 @@ impl Solution {
                         node.next = new_next;
                         Some(node)
                     }
+                } else if is_first {
+                    node.next = Self::delete_duplicates_node(n, true, false);
+                    Some(node)
                 } else {
-                    if is_first {
-                        node.next = Self::delete_duplicates_node(n, true, false);
-                        Some(node)
-                    } else {
-                        Self::delete_duplicates_node(n, true, false)
-                    }
+                    Self::delete_duplicates_node(n, true, false)
                 }
             }
             _ => None,

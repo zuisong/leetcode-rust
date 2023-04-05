@@ -39,7 +39,7 @@ impl Solution {
                 s.push(char::from(b'A' - 1 + n as u8));
             }
             s.shrink_to_fit();
-            return s;
+            s
         } else {
             let mut str = String::new();
             let i = n % 26;
@@ -51,7 +51,7 @@ impl Solution {
                 str.push_str(Self::convert_to_title(i).as_str());
             }
             str.shrink_to_fit();
-            return str;
+            str
         }
     }
 }

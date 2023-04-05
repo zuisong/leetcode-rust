@@ -37,7 +37,7 @@ impl Solution {
             dbg!(&res);
         }
 
-        return res;
+        res
     }
 }
 

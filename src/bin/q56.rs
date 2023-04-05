@@ -56,7 +56,7 @@ impl Solution {
             };
         }
         result.insert(0, interval1);
-        return result;
+        result
     }
 }
 

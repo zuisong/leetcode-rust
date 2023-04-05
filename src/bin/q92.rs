@@ -58,7 +58,7 @@ impl Solution {
                 }
                 node.as_mut().unwrap().next = head;
 
-                return ddd(n1, node, tail, m, n, p + 1);
+                ddd(n1, node, tail, m, n, p + 1)
             } else {
                 unsafe {
                     (*tail).as_mut().unwrap().next = node;
@@ -74,7 +74,7 @@ impl Solution {
             return None;
         }
         if m == 1 {
-            return ddd(head, None, &mut None, m, n, m);
+            ddd(head, None, &mut None, m, n, m)
         } else {
             let mut mid = head.as_mut();
 
@@ -87,7 +87,7 @@ impl Solution {
             node_m = ddd(node_m, None, &mut None, m, n, m);
 
             mid.as_mut().unwrap().next = node_m;
-            return head;
+            head
         }
     }
 }

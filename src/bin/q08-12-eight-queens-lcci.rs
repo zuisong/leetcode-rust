@@ -34,42 +34,43 @@ impl Solution {
         let mut result: Vec<Vec<String>> = vec![];
         let mut v = vec![0; n];
 
-        fn solve(v: &mut Vec<usize>, i: usize, result: &mut Vec<Vec<String>>) {
-            let n = v.len();
-            if i == v.len() {
-                let mut mat = vec![];
-                for x in v {
-                    let mut res = vec!["."; n];
-                    res[*x] = "Q";
-                    mat.push((res).join(""));
-                }
-                result.push(mat);
-                return;
-            }
+        Self::solve(&mut v, 0, &mut result);
+        result
+    }
 
-            // 遍历可以填的数字
-            for x in 0..v.len() {
-                //假装填入数字
-                v[i] = x;
-                let mut checked = true;
-                // 遍历已经填的数字
-                for j in 0..i {
-                    if (v[j] as i32 - v[i] as i32).pow(2) == (i as i32 - j as i32).pow(2)
-                        || v[j] == v[i]
-                    {
-                        checked = false;
-                        break;
-                    }
-                }
-                if checked {
-                    solve(v, i + 1, result);
-                }
-                // 还原
-                v[i] = 0;
+    fn solve(v: &mut Vec<usize>, i: usize, result: &mut Vec<Vec<String>>) {
+        let n = v.len();
+        if i == n {
+            let mut mat = vec![];
+            for x in v {
+                let mut res = vec!["."; n];
+                res[*x] = "Q";
+                mat.push((res).join(""));
             }
+            result.push(mat);
+            return;
         }
-        solve(&mut v, 0, &mut result);
-        return result;
+
+        // 遍历可以填的数字
+        for x in 0..n {
+            //假装填入数字
+            v[i] = x;
+            let mut checked = true;
+            // 遍历已经填的数字
+            for j in 0..i {
+                if (v[j] as i32 - v[i] as i32).pow(2) == (i as i32 - j as i32).pow(2)
+                    || v[j] == v[i]
+                {
+                    checked = false;
+                    break;
+                }
+            }
+            if checked {
+                Self::solve(v, i + 1, result);
+            }
+            // 还原
+            v[i] = 0;
+        }
     }
 }
 

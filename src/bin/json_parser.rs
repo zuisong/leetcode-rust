@@ -136,7 +136,7 @@ impl JsonNode {
                 s.push('}');
                 s
             }
-            JsonNode::String(s) => format!(r#""{}""#, s.replace(r#"""#, r#"\""#)),
+            JsonNode::String(s) => format!(r#""{}""#, s.replace('"', r#"\""#)),
             JsonNode::Num(num) => (*num).to_string(),
             JsonNode::NumFloat(num) => (*num).to_string(),
             JsonNode::Array(arr) => format!(

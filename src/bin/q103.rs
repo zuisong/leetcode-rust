@@ -81,7 +81,7 @@ impl Solution {
                     }
                 }
                 None => {
-                    res.push(std::mem::replace(&mut temp, vec![]));
+                    res.push(std::mem::take(&mut temp));
                     if temp_vec.is_empty() {
                         break;
                     }

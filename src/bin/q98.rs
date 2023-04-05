@@ -72,7 +72,7 @@ impl Solution {
                 }
             }
         }
-        return is_valid_bst2(&root, i64::min_value(), i64::max_value());
+        is_valid_bst2(&root, i64::min_value(), i64::max_value())
     }
 }
 

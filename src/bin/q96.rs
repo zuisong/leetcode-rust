@@ -35,7 +35,7 @@ impl Solution {
             dp[i] = res;
         }
 
-        return dp[n];
+        dp[n]
     }
 }
 

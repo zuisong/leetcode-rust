@@ -101,7 +101,7 @@ impl Solution {
                 }
 
                 if count > 0 {
-                    board[x as usize][y as usize] = char::from(count + '0' as u8);
+                    board[x as usize][y as usize] = char::from(count + b'0');
                     return board;
                 } else {
                     board[x as usize][y as usize] = 'B';
@@ -126,7 +126,7 @@ impl Solution {
                 unreachable!();
             }
         }
-        return board;
+        board
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
@@ -151,10 +151,10 @@ fn main() {
         vec!['E', 'E', 'E', 'E', 'E'],
     ];
     check(b.clone(), vec![3, 0]);
-    check(b.clone(), vec![0, 0]);
+    check(b, vec![0, 0]);
 }
 
-fn check(v: Vec<Vec<char>>, click: Vec<i32>) -> () {
+fn check(v: Vec<Vec<char>>, click: Vec<i32>) {
     let s = Solution::update_board(v, click);
     s.iter().for_each(|line| {
         println!("{:?}", line);

@@ -1,5 +1,3 @@
-#![feature(box_syntax)]
-
 pub mod bst;
 
 #[allow(unused_must_use)]

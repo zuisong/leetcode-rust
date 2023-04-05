@@ -33,7 +33,7 @@ impl Solution {
             Self::get_max_l(&r, val, &mut max_l);
             return max_l.get();
         };
-        return 0;
+        0
     }
 
     fn get_max_l(r: &Option<Rc<RefCell<TreeNode>>>, val: i32, max_l: &mut Cell<i32>) -> i32 {

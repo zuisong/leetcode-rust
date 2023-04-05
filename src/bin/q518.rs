@@ -45,7 +45,7 @@ impl Solution {
         dp[0] = 1;
         for (_, &n) in coins.iter().enumerate() {
             for i in (n as usize)..dp.len() {
-                dp[i] = dp[i] + dp[i - n as usize];
+                dp[i] += dp[i - n as usize];
             }
         }
 
@@ -91,8 +91,7 @@ impl Solution {
             res
         }
 
-        let res = count(&coins, coins.len(), amount as i32, &mut HashMap::new());
-        res
+        count(&coins, coins.len(), amount, &mut HashMap::new())
     }
 }
 
@@ -102,14 +101,8 @@ fn main() {
     for i in (100..=1000).step_by(100) {
         println!("n={}", i);
 
-        println!(
-            "{}",
-            Solution::change(i as i32, vec![1, 5, 10, 20, 50, 100])
-        );
+        println!("{}", Solution::change(i, vec![1, 5, 10, 20, 50, 100]));
 
-        println!(
-            "{}",
-            Solution::change2(i as i32, vec![1, 5, 10, 20, 50, 100])
-        );
+        println!("{}", Solution::change2(i, vec![1, 5, 10, 20, 50, 100]));
     }
 }

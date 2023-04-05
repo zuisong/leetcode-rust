@@ -94,7 +94,7 @@ fn main() {
 
     let b = Solution::search_matrix(matrix, 1);
 
-    assert_eq!(false, b);
+    assert!(!b);
 }
 
 struct Solution {}

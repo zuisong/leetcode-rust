@@ -76,7 +76,7 @@ impl Solution {
                 (_, _) => false,
             };
         }
-        return is_same_tree2(&p, &q);
+        is_same_tree2(&p, &q)
     }
 }
 

@@ -90,7 +90,7 @@ pub fn find_bottom_left_value(
 impl Solution {
     pub fn find_bottom_left_value(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
         let option = find_bottom_left_value(&root, 0);
-        return option.unwrap().0;
+        option.unwrap().0
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

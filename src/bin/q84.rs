@@ -27,8 +27,7 @@ impl Solution {
             let idx = stack.pop().unwrap();
             result = result.max(
                 heights[idx]
-                    * (heights.len() as i32 - 1 - stack.last().map(|it| *it as i32).unwrap_or(-1))
-                        as i32,
+                    * (heights.len() as i32 - 1 - stack.last().map(|it| *it as i32).unwrap_or(-1)),
             );
         }
 

@@ -32,7 +32,7 @@ impl Solution {
         let mut result = vec![];
         Self::helper(&root, 0, &mut result);
         result.reverse();
-        return result;
+        result
     }
     fn helper(node: &Option<Rc<RefCell<TreeNode>>>, level: usize, result: &mut Vec<Vec<i32>>) {
         match node {

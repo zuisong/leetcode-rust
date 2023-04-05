@@ -57,7 +57,7 @@ impl Solution {
                 node
             }
         }
-        return swap_p(head);
+        swap_p(head)
     }
 }
 

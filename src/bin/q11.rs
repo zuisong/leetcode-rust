@@ -16,9 +16,9 @@ impl Solution {
         let h2 = height[idx2];
         let cur_area = h1.min(h2) * ((idx2 - idx1) as i32);
         if h1 > h2 {
-            return Self::max_(idx1, idx2 - 1, height, cur_area.max(max_area));
+            Self::max_(idx1, idx2 - 1, height, cur_area.max(max_area))
         } else {
-            return Self::max_(idx1 + 1, idx2, height, cur_area.max(max_area));
+            Self::max_(idx1 + 1, idx2, height, cur_area.max(max_area))
         }
     }
 

@@ -73,7 +73,7 @@ impl Solution {
             }
         }
         let d = deep(&root);
-        return d.1;
+        d.1
     }
 }
 

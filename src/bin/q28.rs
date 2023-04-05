@@ -78,13 +78,11 @@ impl Solution {
                 next[i] = (j + 1) as i32;
                 j += 1;
                 i += 1;
+            } else if j == 0 {
+                next[i] = 0;
+                i += 1;
             } else {
-                if j == 0 {
-                    next[i] = 0;
-                    i += 1;
-                } else {
-                    j = next[j - 1] as usize;
-                }
+                j = next[j - 1] as usize;
             }
         }
 
@@ -93,7 +91,7 @@ impl Solution {
         }
         next[0] = -1;
 
-        return next;
+        next
     }
 }
 

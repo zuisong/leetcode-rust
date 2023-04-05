@@ -36,10 +36,8 @@ impl Solution {
             if 9 >= latest_num - k && latest_num - k >= 0 {
                 Solution::dfs(deep + 1, val * 10 + latest_num - k, n, k, res)
             }
-            if k != 0 {
-                if 9 >= latest_num + k && latest_num + k >= 0 {
-                    Solution::dfs(deep + 1, val * 10 + latest_num + k, n, k, res)
-                }
+            if k != 0 && 9 >= latest_num + k && latest_num + k >= 0 {
+                Solution::dfs(deep + 1, val * 10 + latest_num + k, n, k, res)
             }
         }
         if deep == n {
@@ -53,7 +51,7 @@ impl Solution {
 
         Solution::dfs(0, 0, n, k, &mut res);
 
-        return res;
+        res
     }
 }
 

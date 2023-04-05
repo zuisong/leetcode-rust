@@ -28,7 +28,7 @@ impl Solution {
         let m = a ^ b;
         let n = a & b;
 
-        return Self::get_sum(m, n << 1);
+        Self::get_sum(m, n << 1)
     }
 }
 

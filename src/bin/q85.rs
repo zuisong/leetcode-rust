@@ -23,7 +23,7 @@ impl Solution {
             result = q84::Solution::largest_rectangle_area(heights).max(result);
         });
 
-        return result;
+        result
     }
 }
 

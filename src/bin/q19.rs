@@ -64,7 +64,7 @@ impl Solution {
             }
         }
 
-        unsafe { std::mem::swap(&mut (*ptr), &mut (*ptr).take().unwrap().next) }
+        unsafe { core::ptr::swap(ptr, &mut (*ptr).take().unwrap().next) }
 
         head
     }

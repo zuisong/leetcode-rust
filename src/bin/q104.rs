@@ -51,7 +51,7 @@ fn main() {}
 ///
 impl Solution {
     pub fn max_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-        return Self::max_depth2(&root);
+        Self::max_depth2(&root)
     }
 
     pub fn max_depth2(node: &Option<Rc<RefCell<TreeNode>>>) -> i32 {

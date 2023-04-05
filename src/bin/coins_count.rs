@@ -17,7 +17,7 @@ fn func1(target: usize) {
     let start = Instant::now();
 
     let coins = [5, 10, 20, 50, 100];
-    let mut table = vec![1 as u64; target + 1];
+    let mut table = vec![1_u64; target + 1];
     for j in 0..coins.len() {
         for i in coins[j]..=target {
             table[i] += table[i - coins[j]];

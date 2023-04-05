@@ -49,7 +49,7 @@
 impl Solution {
     pub fn get_permutation(n: i32, mut k: i32) -> String {
         fn j(n: i32) -> i32 {
-            (1..n).fold(1, |a, b| a * b)
+            (1..n).product()
         }
         let mut v: Vec<i32> = (1..=n).collect();
         let mut res = vec![];
@@ -59,7 +59,7 @@ impl Solution {
             let idx = k / jn;
             let n = v.remove(idx as usize);
             res.push(n);
-            k = k % jn;
+            k %= jn;
         }
 
         for n in v {

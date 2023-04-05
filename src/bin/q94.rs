@@ -51,7 +51,7 @@ impl Solution {
         }
         let mut res = vec![];
         f(&root, &mut res);
-        return res;
+        res
     }
 }
 

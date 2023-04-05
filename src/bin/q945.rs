@@ -42,12 +42,12 @@ impl Solution {
         let mut result = 0;
         for idx in 1..a.len() {
             if a[idx - 1] >= a[idx] {
-                result += (a[idx - 1] - a[idx] + 1);
+                result += a[idx - 1] - a[idx] + 1;
                 a[idx] = a[idx - 1] + 1;
             }
         }
 
-        return result;
+        result
     }
 }
 

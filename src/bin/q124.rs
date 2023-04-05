@@ -76,7 +76,7 @@ impl Solution {
                 None => 0,
             }
         }
-        let mut cell = Cell::new(0x7f_ff_ff_ff * -1);
+        let mut cell = Cell::new(-0x7f_ff_ff_ff);
         max_path_sum1(&root, &mut cell);
         cell.get()
     }

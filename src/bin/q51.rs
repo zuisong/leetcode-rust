@@ -65,9 +65,8 @@ impl Solution {
                     let mut s = vec![EMPTY_GRID; n as usize];
                     s[*it as usize] = QUEEN_GRID;
 
-                    let s = s.join("");
                     //                    info!("{}", s);
-                    s
+                    s.join("")
                 })
                 .collect();
 
@@ -96,7 +95,7 @@ impl Solution {
         let mut v = vec![-1; n as usize];
         let mut res: Vec<Vec<String>> = vec![];
         Solution::dfs(&mut v, 0, &mut res);
-        return res;
+        res
     }
 }
 

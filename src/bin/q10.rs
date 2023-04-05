@@ -112,34 +112,34 @@ fn main() {
     let s = "aaa".to_string();
     let p = "ab*a*c*a".to_string();
     let res = Solution::is_match(s, p);
-    assert_eq!(true, res);
+    assert!(res);
     let s = "mississippi".to_string();
     let p = "mis*is*p*.".to_string();
     let res = Solution::is_match(s, p);
-    assert_eq!(false, res);
+    assert!(!res);
 
     let s = "aab".to_string();
     let p = "c*a*b".to_string();
     let res = Solution::is_match(s, p);
-    assert_eq!(true, res);
+    assert!(res);
 
     let s = "aaa".to_string();
     let p = "a*".to_string();
     let res = Solution::is_match(s, p);
-    assert_eq!(true, res);
+    assert!(res);
 
     let s = "aa".to_string();
     let p = "a*".to_string();
     let res = Solution::is_match(s, p);
-    assert_eq!(true, res);
+    assert!(res);
 
     let s = "aa".to_string();
     let p = "a".to_string();
     let res = Solution::is_match(s, p);
-    assert_eq!(false, res);
+    assert!(!res);
 
     let s = "".to_string();
     let p = "a*".to_string();
     let res = Solution::is_match(s, p);
-    assert_eq!(true, res);
+    assert!(res);
 }

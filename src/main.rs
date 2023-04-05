@@ -17,9 +17,9 @@ fn f1() -> Box<dyn Fn(i32) -> i32> {
     let s = "151545";
     let x1: Box<dyn Fn(i32) -> i32> = Box::from(move |x: i32| {
         println!("{}", &s);
-        return x + 1;
+        x + 1
     });
     println!("{}", s);
 
-    return x1;
+    x1
 }

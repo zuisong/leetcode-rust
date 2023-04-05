@@ -50,25 +50,23 @@ impl Solution {
                     if mid == 0 {
                         return -1;
                     }
-                    return s(nums, target, left, mid - 1);
+                    s(nums, target, left, mid - 1)
                 } else {
-                    return s(nums, target, mid + 1, right);
+                    s(nums, target, mid + 1, right)
                 }
+            } else if *target > nums[mid] && *target <= nums[right] {
+                s(nums, target, mid + 1, right)
             } else {
-                if *target > nums[mid] && *target <= nums[right] {
-                    return s(nums, target, mid + 1, right);
-                } else {
-                    if mid == 0 {
-                        return -1;
-                    }
-                    return s(nums, target, left, mid - 1);
+                if mid == 0 {
+                    return -1;
                 }
+                s(nums, target, left, mid - 1)
             }
         }
         if nums.is_empty() {
             return -1;
         }
-        return s(&nums, &target, 0, nums.len() - 1);
+        s(&nums, &target, 0, nums.len() - 1)
     }
 }
 

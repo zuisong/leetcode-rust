@@ -68,7 +68,7 @@ impl Solution {
         if inorder.len() != postorder.len() {
             unreachable!();
         }
-        if inorder.len() == 0 {
+        if inorder.is_empty() {
             return None;
         }
 
@@ -100,6 +100,6 @@ impl Solution {
             right: right_node,
         };
 
-        return Some(Rc::new(RefCell::new(tree)));
+        Some(Rc::new(RefCell::new(tree)))
     }
 }

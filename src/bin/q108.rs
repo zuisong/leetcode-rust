@@ -49,11 +49,11 @@ impl Solution {
         let val = nums[len / 2];
         let left_node = Self::helper(&nums[0..len / 2]);
         let right_node = Self::helper(&nums[(len / 2 + 1)..len]);
-        return Some(Rc::new(RefCell::new(TreeNode {
+        Some(Rc::new(RefCell::new(TreeNode {
             val,
             left: left_node,
             right: right_node,
-        })));
+        })))
     }
 }
 
@@ -79,7 +79,7 @@ impl TreeNode {
 struct Solution {}
 
 fn main() {
-    let mut nums = vec![-10, -3, 0, 5, 9];
+    let nums = vec![-10, -3, 0, 5, 9];
     let bst = Solution::sorted_array_to_bst(nums);
     dbg!(&bst);
 }

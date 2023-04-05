@@ -65,7 +65,7 @@ impl Solution {
             map.insert(idx, count);
             count
         }
-        return decode_count(cs, 0, &mut HashMap::new());
+        decode_count(cs, 0, &mut HashMap::new())
     }
 }
 fn main() {

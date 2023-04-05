@@ -10,7 +10,7 @@ impl Solution {
     fn get_row_col(n: usize) -> (usize, usize) {
         let row = n / 9;
         let col = n % 9;
-        return (row, col);
+        (row, col)
     }
 
     fn check_num(c: char, n: usize, board: &mut Vec<Vec<char>>) -> bool {
@@ -25,7 +25,7 @@ impl Solution {
                 return false;
             }
         }
-        return true;
+        true
     }
     fn check_grid(c: char, n: usize, board: &mut Vec<Vec<char>>) -> bool {
         let grid_row = n / 27;
@@ -37,7 +37,7 @@ impl Solution {
                 }
             }
         }
-        return true;
+        true
     }
 
     fn dfs(n: usize, board: &mut Vec<Vec<char>>) -> bool {
@@ -63,7 +63,7 @@ impl Solution {
             }
         }
 
-        return false;
+        false
     }
 
     pub fn solve_sudoku(board: &mut Vec<Vec<char>>) {

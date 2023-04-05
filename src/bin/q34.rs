@@ -55,9 +55,9 @@ fn search(nums: &Vec<i32>, target: i32, s_idx: usize, e_idx: usize) -> Vec<i32> 
         if mid == 0 {
             return vec![-1, -1];
         }
-        return search(nums, target, s_idx, mid - 1);
+        search(nums, target, s_idx, mid - 1)
     } else {
-        return search(nums, target, mid + 1, e_idx);
+        search(nums, target, mid + 1, e_idx)
     }
 }
 

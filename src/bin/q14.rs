@@ -24,7 +24,7 @@ impl Solution {
 
                     if !b {
                         let s: String = strs.first().unwrap().chars().take(i).collect();
-                        return s.to_string();
+                        return s;
                     };
                 }
                 return strs.first().unwrap().to_string();

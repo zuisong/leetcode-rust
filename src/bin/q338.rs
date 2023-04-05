@@ -29,7 +29,7 @@ impl Solution {
         for i in 1..=num {
             result[i] = result[i / 2] + (i & 1) as i32;
         }
-        return result;
+        result
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

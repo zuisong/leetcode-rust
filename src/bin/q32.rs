@@ -41,19 +41,17 @@ impl Solution {
             for i2 in i1..=l {
                 if chars[i2 - 1] == '(' {
                     v[i2] = v[i2 - 1] + 1;
-                } else {
-                    if v[i2 - 1] > 0 {
-                        v[i2] = v[i2 - 1] - 1;
-                        if v[i2] == 0 {
-                            temp += count + 1;
-                            res = res.max(temp);
-                            count = 0;
-                        } else {
-                            count += 1;
-                        }
+                } else if v[i2 - 1] > 0 {
+                    v[i2] = v[i2 - 1] - 1;
+                    if v[i2] == 0 {
+                        temp += count + 1;
+                        res = res.max(temp);
+                        count = 0;
                     } else {
-                        break;
+                        count += 1;
                     }
+                } else {
+                    break;
                 }
             }
         }

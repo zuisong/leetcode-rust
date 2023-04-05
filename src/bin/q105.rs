@@ -75,7 +75,7 @@ impl Solution {
             unreachable!();
         }
 
-        if preorder.len() == 0 {
+        if preorder.is_empty() {
             return None;
         }
         // println!("preorder = {:?}", preorder);
@@ -101,6 +101,6 @@ impl Solution {
         let mut tree_node = TreeNode::new(first_val);
         tree_node.left = left_node;
         tree_node.right = right_node;
-        return Some(Rc::new(RefCell::new(tree_node)));
+        Some(Rc::new(RefCell::new(tree_node)))
     }
 }

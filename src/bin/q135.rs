@@ -47,7 +47,7 @@ impl Solution {
         dbg!(sum);
 
         println!();
-        return sum;
+        sum
     }
 }
 

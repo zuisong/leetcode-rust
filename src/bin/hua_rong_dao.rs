@@ -66,8 +66,8 @@ fn solve(matrix: Vec<Vec<i32>>, target_hash: String, pos0: (i32, i32)) {
                 re[pos0.0 as usize][pos0.1 as usize] = temp;
                 let hash_temp = hash(&re);
 
-                if !map.contains_key(&hash_temp) {
-                    map.insert(hash_temp, (h.clone(), (i, j)));
+                if let std::collections::hash_map::Entry::Vacant(e) = map.entry(hash_temp) {
+                    e.insert((h.clone(), (i, j)));
                     list.push_back((re, (new_pos0x as i32, new_pos0y as i32)))
                 }
             }

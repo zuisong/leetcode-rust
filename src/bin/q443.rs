@@ -112,7 +112,7 @@ impl Solution {
                 write_idx += 1;
             }
         }
-        return write_idx;
+        write_idx
     }
 }
 

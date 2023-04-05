@@ -47,7 +47,7 @@ impl Solution {
             dp[i] = max;
         }
 
-        return dp.into_iter().max().unwrap();
+        dp.into_iter().max().unwrap()
     }
 }
 

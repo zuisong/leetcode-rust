@@ -87,6 +87,6 @@ impl Solution {
             return false;
         }
 
-        return true;
+        true
     }
 }

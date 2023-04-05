@@ -42,7 +42,7 @@ impl Solution {
                 }
                 list_node_to_vec(it)
             })
-            .flat_map(|it| Vec::into_iter(it))
+            .flat_map(Vec::into_iter)
             .collect();
 
         fn vec_to_list_node(mut v: Vec<i32>) -> Option<Box<ListNode>> {

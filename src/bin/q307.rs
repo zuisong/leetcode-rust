@@ -59,8 +59,7 @@ impl NumArray {
             datas[i] = datas[2 * i] + datas[2 * i + 1];
         }
 
-        let num_arr = NumArray { datas };
-        return num_arr;
+        NumArray { datas }
     }
 
     fn update(&mut self, i: i32, val: i32) {
@@ -69,7 +68,7 @@ impl NumArray {
         self.datas[index] = val;
 
         while index != 1 {
-            index = index / 2;
+            index /= 2;
             self.datas[index] = self.datas[2 * index] + self.datas[2 * index + 1];
         }
     }
@@ -82,19 +81,19 @@ impl NumArray {
             if idx == 0 {
                 return datas[len];
             }
-            return if idx % 2 == 1 {
+            if idx % 2 == 1 {
                 sum_range(datas, idx / 2, len / 2)
             } else {
                 sum_range(datas, idx - 1, len) + datas[len + idx]
-            };
+            }
         }
 
         let i = i as usize;
         let j = j as usize;
-        let mut len = self.datas.len() / 2;
-        let mut ii = len + i;
+        let len = self.datas.len() / 2;
+        let ii = len + i;
 
-        return sum_range(&self.datas, j, len) - sum_range(&self.datas, i, len) + self.datas[ii];
+        sum_range(&self.datas, j, len) - sum_range(&self.datas, i, len) + self.datas[ii]
     }
 }
 

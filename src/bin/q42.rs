@@ -61,7 +61,7 @@ impl Solution {
             }
         }
 
-        return result;
+        result
     }
 }
 

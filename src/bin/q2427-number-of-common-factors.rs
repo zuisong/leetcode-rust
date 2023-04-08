@@ -52,7 +52,6 @@ impl Solution {
                 a1 = c;
             }
         }
-        println!("{}", &max_factor);
         (1..=max_factor)
             .into_iter()
             .filter(|it| max_factor % it == 0)
@@ -62,5 +61,7 @@ impl Solution {
 
 fn main() {
     let res = Solution::common_factors(25, 30);
-    println!("{}", res)
+    println!("{}", res);
+    // 25 和 30 的公因子是 1、5
+    assert_eq!(2, res);
 }

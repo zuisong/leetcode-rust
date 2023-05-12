@@ -8,11 +8,13 @@ extern crate quickcheck_macros;
 
 #[cfg(test)]
 mod tests {
+    use base64::engine::general_purpose::STANDARD;
     use base64::Engine;
     use log::*;
 
-    use crate::{decode_base64, encode_base64};
     use leetcode_rust::init_logger;
+
+    use crate::{decode_base64, encode_base64};
 
     #[quickcheck]
     fn quickcheck_base64(s: String) {
@@ -22,7 +24,7 @@ mod tests {
             return;
         }
         let s = &s;
-        let base64_encoded = base64::engine::general_purpose::STANDARD.encode(s.as_bytes());
+        let base64_encoded = STANDARD.encode(s);
         let my_encodeed = encode_base64(s.as_ref());
         warn!("{:?}", s);
 

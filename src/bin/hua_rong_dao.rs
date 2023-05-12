@@ -2,7 +2,7 @@ use std::collections::{HashMap, VecDeque};
 use std::process::exit;
 
 fn main() {
-    simple_logger::SimpleLogger::new().init().unwrap();
+    leetcode_rust::init_logger();
 
     let res = vec![
         vec![1, 2, 4, 15],

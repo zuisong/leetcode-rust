@@ -33,11 +33,6 @@
  *
  *
  */
-#[cfg(test)]
-extern crate quickcheck;
-#[cfg(test)]
-#[macro_use(quickcheck)]
-extern crate quickcheck_macros;
 
 use std::collections::vec_deque::VecDeque;
 
@@ -132,7 +127,10 @@ fn main() {
 mod test {
     use crate::Solution;
 
-    #[quickcheck]
+    use test_case::test_case;
+    #[test_case(5, 5)]
+    #[test_case(5, 1)]
+    #[test_case(5, 9)]
     fn quickcheck_test(num1: u64, num2: u64) {
         let result = Solution::multiply(num1.to_string(), num2.to_string());
         println!("{} x {} = {:?}, {:?}", num1, num2, num1 * num2, result);

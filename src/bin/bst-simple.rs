@@ -167,7 +167,7 @@ mod tests {
 
     #[test]
     fn test() {
-        let mut tree: Box<dyn BinarySearchTree> =  Box::new(SimpleBinarySearchTree::new());
+        let mut tree: Box<dyn BinarySearchTree> = Box::new(SimpleBinarySearchTree::new());
         assert_eq!(false, tree.find(1));
         assert_eq!(false, tree.find(2));
         assert_eq!(false, tree.find(3));

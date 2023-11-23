@@ -1,30 +1,27 @@
-#[macro_use]
-extern crate lazy_static;
-#[cfg(test)]
-extern crate quickcheck;
-#[cfg(test)]
-#[macro_use(quickcheck)]
-extern crate quickcheck_macros;
+#![feature(lazy_cell)]
+
+use std::sync::LazyLock;
 
 #[cfg(test)]
 mod tests {
-    use base64::engine::general_purpose::STANDARD;
-    use base64::Engine;
-    use log::*;
+    use test_case::test_case;
 
     use leetcode_rust::init_logger;
 
     use crate::{decode_base64, encode_base64};
+    use base64ct::{Base64, Encoding};
+    use tracing::warn;
 
-    #[quickcheck]
-    fn quickcheck_base64(s: String) {
+    #[test_case("hello")]
+    #[test_case("你好")]
+    #[test_case("emoji😏")]
+    fn quickcheck_base64(s: &str) {
         init_logger();
 
         if s.is_empty() {
             return;
         }
-        let s = &s;
-        let base64_encoded = STANDARD.encode(s);
+        let base64_encoded = Base64::encode_string(s.as_bytes());
         let my_encodeed = encode_base64(s.as_ref());
         warn!("{:?}", s);
 
@@ -79,16 +76,14 @@ const BASE64_ALPHABET: [u8; 64] = [
     b'y', b'z', b'0', b'1', b'2', b'3', b'4', b'5', b'6', b'7', //  50 -  59
     b'8', b'9', b'+', b'/', //  60 -  63
 ];
-
-lazy_static! {
-    static ref BASE64_DEALPHABET: [u8; 128] = {
+static BASE64_DEALPHABET: LazyLock<[u8; 128]> =
+    LazyLock::new(|| {
         let mut v: [u8; 128] = [0_u8; 128];
         for (idx, &val) in BASE64_ALPHABET.iter().enumerate() {
             v[val as usize] = idx as u8;
         }
         v
-    };
-}
+    });
 
 fn encode_base64(data: &[u8]) -> String {
     let len = data.len();
@@ -116,11 +111,10 @@ fn encode_base64(data: &[u8]) -> String {
             }
             _ => unreachable!(),
         };
-        if j == 2 {
+        j += 1;
+        if j == 3 {
             j = 0;
-        } else {
-            j += 1;
-        };
+        }
     }
     // res.iter().for_each(|it| print!("{:06b} ", it));
     // println!();

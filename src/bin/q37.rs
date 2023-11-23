@@ -1,7 +1,5 @@
-extern crate log;
-
 use leetcode_rust::init_logger;
-use log::*;
+use tracing::info;
 
 struct Solution {}
 

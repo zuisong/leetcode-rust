@@ -2,13 +2,12 @@ use std::time::Instant;
 
 /// 有面值1,5,10，20,50,100的人民币，求问10000有多少种组成方法？
 fn main() {
+    init_logger();
     for i in (1000..=10000).step_by(1000) {
-        println!("n={}", i);
+        info!("n={}", i);
         func1(i);
-        println!();
         func2(i);
-        println!();
-        println!("===");
+        info!("===");
     }
 }
 
@@ -26,11 +25,13 @@ fn func1(target: usize) {
     let end = Instant::now();
     let res = table[target];
 
-    println!("程序运行时间是 --> {:?}", end - start);
-    println!("共有 {} 种可能性", res);
+    info!("动态规划解法 程序运行时间是 --> {:?}", end - start);
+    info!("共有 {} 种可能性", res);
 }
 
+use leetcode_rust::init_logger;
 use std::collections::HashMap;
+use tracing::info;
 
 ///
 /// 递归解
@@ -73,7 +74,7 @@ fn func2(target: usize) {
     let start = Instant::now();
     let res = count(&coins, coins.len(), target as i32, &mut HashMap::new());
     let end = Instant::now();
-    //    println!("{:?}", local);
-    println!("程序运行时间是 --> {:?}", end - start);
-    println!("共有 {} 种可能性", res);
+    //    info!("{:?}", local);
+    info!("递归解法 程序运行时间是 --> {:?}", end - start);
+    info!("共有 {} 种可能性", res);
 }

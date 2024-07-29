@@ -1,12 +1,11 @@
 use std::collections::HashMap;
 
-use rand::Rng;
-
 fn main() {
+    let mut rng = fastrand::Rng::new();
     let n = 10000;
     let mut arr: Vec<_> = vec![0i32; n as usize];
-    let target = rand::thread_rng().gen_range(0..n);
-    rand::thread_rng().fill(&mut arr[..]);
+    let target = rng.choice(0..n).unwrap_or_default();
+    arr.fill_with(|| rng.i32(i32::MIN..i32::MAX));
     //    dbg!(&arr);
     let time1 = std::time::Instant::now();
     let _res1 = solve1(&arr, target);
@@ -41,11 +40,8 @@ fn solve2(numbers: &Vec<i32>, target: i32) -> (usize, usize) {
         map.insert(numbers[i], i);
     }
     for i in 0..numbers.len() {
-        match map.get(&(target - numbers[i])) {
-            Some(&j) => {
-                return (i, j);
-            }
-            None => {}
+        if let Some(&j) = map.get(&(target - numbers[i])) {
+            return (i, j);
         }
     }
     (0, 0)

@@ -59,7 +59,7 @@ impl Solution {
                 if node.next.is_none() {
                     Some(node)
                 } else {
-                    let next = std::mem::replace(&mut node.next, None);
+                    let next = node.next.take();
                     let mut new_head = Self::reverse_list2(next);
 
                     let mut temp = &mut new_head;

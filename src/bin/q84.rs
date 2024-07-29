@@ -23,8 +23,7 @@ impl Solution {
 
         //        dbg!(&stack);
 
-        while !stack.is_empty() {
-            let idx = stack.pop().unwrap();
+        while let Some(idx) = stack.pop() {
             result = result.max(
                 heights[idx]
                     * (heights.len() as i32 - 1 - stack.last().map(|it| *it as i32).unwrap_or(-1)),

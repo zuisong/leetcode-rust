@@ -1,37 +1,4 @@
-#![feature(lazy_cell)]
-
 use std::sync::LazyLock;
-
-#[cfg(test)]
-mod tests {
-    use test_case::test_case;
-
-    use leetcode_rust::init_logger;
-
-    use crate::{decode_base64, encode_base64};
-    use base64ct::{Base64, Encoding};
-    use tracing::warn;
-
-    #[test_case("hello")]
-    #[test_case("你好")]
-    #[test_case("emoji😏")]
-    fn quickcheck_base64(s: &str) {
-        init_logger();
-
-        if s.is_empty() {
-            return;
-        }
-        let base64_encoded = Base64::encode_string(s.as_bytes());
-        let my_encodeed = encode_base64(s.as_ref());
-        warn!("{:?}", s);
-
-        assert_eq!(base64_encoded, my_encodeed);
-
-        let res = decode_base64(&base64_encoded);
-        let res = String::from_utf8(res).unwrap();
-        assert_eq!(&res, s);
-    }
-}
 
 fn main() {
     let word = "chenjian";
@@ -76,14 +43,13 @@ const BASE64_ALPHABET: [u8; 64] = [
     b'y', b'z', b'0', b'1', b'2', b'3', b'4', b'5', b'6', b'7', //  50 -  59
     b'8', b'9', b'+', b'/', //  60 -  63
 ];
-static BASE64_DEALPHABET: LazyLock<[u8; 128]> =
-    LazyLock::new(|| {
-        let mut v: [u8; 128] = [0_u8; 128];
-        for (idx, &val) in BASE64_ALPHABET.iter().enumerate() {
-            v[val as usize] = idx as u8;
-        }
-        v
-    });
+static BASE64_DEALPHABET: LazyLock<[u8; 128]> = LazyLock::new(|| {
+    let mut v: [u8; 128] = [0_u8; 128];
+    for (idx, &val) in BASE64_ALPHABET.iter().enumerate() {
+        v[val as usize] = idx as u8;
+    }
+    v
+});
 
 fn encode_base64(data: &[u8]) -> String {
     let len = data.len();
@@ -170,4 +136,35 @@ fn decode_base64(base64_str: &str) -> Vec<u8> {
         res.pop();
     };
     res
+}
+
+#[cfg(test)]
+mod tests {
+    use ::base64::prelude::*;
+    use test_case::test_case;
+
+    use leetcode_rust::init_logger;
+
+    use crate::{decode_base64, encode_base64};
+    use tracing::warn;
+
+    #[test_case("hello")]
+    #[test_case("你好")]
+    #[test_case("emoji😏")]
+    fn quickcheck_base64(s: &str) {
+        init_logger();
+
+        if s.is_empty() {
+            return;
+        }
+        let base64_encoded = BASE64_STANDARD.encode(s.as_bytes());
+        let my_encodeed = encode_base64(s.as_ref());
+        warn!("{:?}", s);
+
+        assert_eq!(base64_encoded, my_encodeed);
+
+        let res = decode_base64(&base64_encoded);
+        let res = String::from_utf8(res).unwrap();
+        assert_eq!(&res, s);
+    }
 }

@@ -37,12 +37,10 @@ impl Solution {
         let mut a1 = a;
         let mut b1 = b;
 
-        let mut max_factor = -1;
+        let max_factor: i32;
         loop {
             if a1 < b1 {
-                let _temp = a1;
-                a1 = b1;
-                b1 = _temp;
+                std::mem::swap(&mut a1, &mut b1);
             }
             let c = a1 % b1;
             if c == 0 {
@@ -52,10 +50,7 @@ impl Solution {
                 a1 = c;
             }
         }
-        (1..=max_factor)
-            .into_iter()
-            .filter(|it| max_factor % it == 0)
-            .count() as i32
+        (1..=max_factor).filter(|it| max_factor % it == 0).count() as i32
     }
 }
 

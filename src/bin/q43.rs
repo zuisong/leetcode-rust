@@ -123,6 +123,8 @@ fn main() {
     println!("{},{}", s, num1 * num2);
 }
 
+struct Solution {}
+
 #[cfg(test)]
 mod test {
     use crate::Solution;
@@ -149,5 +151,3 @@ mod test {
         )
     }
 }
-
-struct Solution {}

@@ -123,6 +123,8 @@ impl LRUCache {
     }
 }
 
+fn main() {}
+
 /**
  * Your LRUCache object will be instantiated and called as such:
  * let obj = LRUCache::new(capacity);
@@ -164,5 +166,3 @@ mod tests {
         assert_eq!(3, cache.get(2));
     }
 }
-
-fn main() {}

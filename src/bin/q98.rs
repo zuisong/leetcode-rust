@@ -51,6 +51,7 @@ impl TreeNode {
 }
 
 use std::cell::RefCell;
+use std::i64;
 use std::rc::Rc;
 
 impl Solution {
@@ -72,7 +73,7 @@ impl Solution {
                 }
             }
         }
-        is_valid_bst2(&root, i64::min_value(), i64::max_value())
+        is_valid_bst2(&root, i64::MIN, i64::MAX)
     }
 }
 

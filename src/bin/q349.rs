@@ -25,8 +25,8 @@ use std::iter::FromIterator;
 //leetcode submit region begin(Prohibit modification and deletion)
 impl Solution {
     pub fn intersection(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
-        let set1: HashSet<i32> = HashSet::from_iter(nums1.into_iter());
-        let set2: HashSet<i32> = HashSet::from_iter(nums2.into_iter());
+        let set1: HashSet<i32> = HashSet::from_iter(nums1);
+        let set2: HashSet<i32> = HashSet::from_iter(nums2);
 
         set2.into_iter().filter(|it| set1.contains(it)).collect()
     }

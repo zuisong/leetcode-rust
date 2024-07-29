@@ -53,7 +53,7 @@ impl Solution {
             dp2 = std::cmp::max(dp2, dp1 + prices[i] - fee);
         }
 
-        return dp2;
+        dp2
     }
 }
 

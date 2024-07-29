@@ -93,13 +93,12 @@ impl Solution {
         let left_node = Self::helper(l_inorder, l_postorder);
         let right_node = Self::helper(r_inorder, r_postorder);
 
-        let tree =
-            TreeNode {
-                val: top_node_val,
+        let tree = TreeNode {
+            val: top_node_val,
 
-                left: left_node,
-                right: right_node,
-            };
+            left: left_node,
+            right: right_node,
+        };
 
         Some(Rc::new(RefCell::new(tree)))
     }

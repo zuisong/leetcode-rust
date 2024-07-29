@@ -23,7 +23,6 @@
  *
  *
  */
-use std::mem::replace;
 
 // Definition for singly-linked list.
 #[derive(PartialEq, Eq, Debug)]
@@ -45,11 +44,11 @@ impl Solution {
             if node.is_some() && node.as_ref().unwrap().next.is_some() {
                 let n1 = &mut node;
                 let n2 = &mut n1.as_mut().unwrap().next;
-                let n3 = replace(&mut n2.as_mut().unwrap().next, None);
+                let n3 = n2.as_mut().unwrap().next.take();
                 let new_n3 = swap_p(n3);
 
-                let mut new_n1 = replace(&mut *n2, None);
-                let mut new_n2 = replace(&mut *n1, None);
+                let mut new_n1 = n2.take();
+                let mut new_n2 = n1.take();
                 new_n2.as_mut().unwrap().next = new_n3;
                 new_n1.as_mut().unwrap().next = new_n2;
                 new_n1

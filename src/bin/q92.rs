@@ -52,7 +52,7 @@ impl Solution {
             p: i32,
         ) -> Option<Box<ListNode>> {
             if p >= m && p <= n {
-                let n1 = std::mem::replace(&mut node.as_mut().unwrap().next, None);
+                let n1 = node.as_mut().unwrap().next.take();
                 if head.is_none() {
                     tail = &mut node;
                 }
@@ -83,7 +83,7 @@ impl Solution {
             }
             let mut node_m: Option<Box<ListNode>>;
 
-            node_m = std::mem::replace(&mut mid.as_mut().unwrap().next, None);
+            node_m = mid.as_mut().unwrap().next.take();
             node_m = ddd(node_m, None, &mut None, m, n, m);
 
             mid.as_mut().unwrap().next = node_m;

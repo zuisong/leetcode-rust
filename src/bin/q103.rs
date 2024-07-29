@@ -61,8 +61,8 @@ impl Solution {
             match v.pop_front().unwrap() {
                 Some(n) => {
                     temp.push(n.borrow().val);
-                    let left = std::mem::replace(&mut n.borrow_mut().left, None);
-                    let right = std::mem::replace(&mut n.borrow_mut().right, None);
+                    let left = n.borrow_mut().left.take();
+                    let right = n.borrow_mut().right.take();
                     if left2right {
                         if left.is_some() {
                             temp_vec.push_back(left);

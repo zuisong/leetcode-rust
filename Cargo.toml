@@ -5,13 +5,13 @@ authors = ["zuisong <378818573@qq.com>"]
 edition = "2021"
 
 [dependencies]
-rand = "0.8.5"
-anyhow = "1.0.75"
-serde_json = "1.0.108"
-tracing-subscriber = "0.3.18"
-tracing = "0.1.40"
+anyhow = "1"
+serde_json = "1"
+tracing-subscriber = "0.3"
+tracing = "0.1"
+fastrand = "2"
 
 
 [dev-dependencies]
 test-case = "3.3.1"
-base64ct = { version = "1.6.0", features = ["std"] }
+base64 = { version = "0.22"}

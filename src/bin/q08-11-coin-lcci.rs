@@ -31,7 +31,7 @@ impl Solution {
         let n = n as usize;
         let mut dp = vec![0; 1 + n];
         dp[0] = 1;
-        for i in vec![1, 5, 10, 25] {
+        for i in [1, 5, 10, 25] {
             for idx in 1..=n {
                 if idx >= i {
                     dp[idx] += dp[idx - i];
@@ -41,7 +41,7 @@ impl Solution {
                 }
             }
         }
-        return dp[n];
+        dp[n]
     }
 }
 

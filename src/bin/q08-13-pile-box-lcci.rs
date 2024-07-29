@@ -35,8 +35,7 @@ impl Solution {
         for i in 1..boxs.len() {
             let mut max = boxs[i][2];
             for j in 0..i {
-                if true
-                    && boxs[i][0] > boxs[j][0]
+                if boxs[i][0] > boxs[j][0]
                     && boxs[i][1] > boxs[j][1]
                     && boxs[i][2] > boxs[j][2]
                     && boxs[i][2] + dp[j] > max

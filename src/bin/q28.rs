@@ -68,7 +68,7 @@ impl Solution {
     ///
     /// 得到 KMP 算法中的 NEXT 数组
     ///
-    fn get_next_vec(word: &Vec<char>) -> Vec<i32> {
+    fn get_next_vec(word: &[char]) -> Vec<i32> {
         let mut next: Vec<i32> = vec![0; word.len()];
         next[0] = 0;
         let mut i = 1;

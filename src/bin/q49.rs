@@ -52,7 +52,7 @@ impl Solution {
 }
 
 fn main() {
-    let v: Vec<String> = vec!["eat", "tea", "tan", "ate", "nat", "bat"]
+    let v: Vec<String> = ["eat", "tea", "tan", "ate", "nat", "bat"]
         .iter()
         .map(|it| it.to_string())
         .collect();

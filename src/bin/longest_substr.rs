@@ -39,12 +39,11 @@ fn common_subseq(str1: &String, str2: &String) -> usize {
 
     for i in 0..s1.len() {
         for j in 0..s2.len() {
-            v[i + 1][j + 1] =
-                if s1[i] == s2[j] {
-                    v[i][j] + 1
-                } else {
-                    v[i + 1][j].max(v[i][j + 1])
-                };
+            v[i + 1][j + 1] = if s1[i] == s2[j] {
+                v[i][j] + 1
+            } else {
+                v[i + 1][j].max(v[i][j + 1])
+            };
         }
     }
 

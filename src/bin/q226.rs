@@ -38,7 +38,6 @@
  *
  */
 use std::cell::RefCell;
-use std::mem::replace;
 use std::rc::Rc;
 
 // Definition for a binary tree node.
@@ -69,8 +68,8 @@ impl Solution {
 
     fn invert_tree1(node: &mut Option<Rc<RefCell<TreeNode>>>) {
         if let Some(node) = node {
-            let mut left = replace(&mut node.borrow_mut().left, None);
-            let mut right = replace(&mut node.borrow_mut().right, None);
+            let mut left = node.borrow_mut().left.take();
+            let mut right = node.borrow_mut().right.take();
             Self::invert_tree1(&mut left);
             Self::invert_tree1(&mut right);
             node.borrow_mut().left = right;

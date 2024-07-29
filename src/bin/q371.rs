@@ -29,6 +29,8 @@ impl Solution {
 //leetcode submit region end(Prohibit modification and deletion)
 struct Solution {}
 
+fn main() {}
+
 #[cfg(test)]
 mod tests {
     use crate::Solution;
@@ -47,5 +49,3 @@ mod tests {
     #[test]
     fn test() {}
 }
-
-fn main() {}

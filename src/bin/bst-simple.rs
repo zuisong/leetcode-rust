@@ -42,7 +42,8 @@ impl BinarySearchTree for SimpleBinarySearchTree {
         loop {
             match node {
                 None => {
-                    std::mem::replace(node, Some(Rc::new(RefCell::new(TreeNode::new(item)))));
+                    let _ =
+                        std::mem::replace(node, Some(Rc::new(RefCell::new(TreeNode::new(item)))));
                     return Ok(());
                 }
                 Some(n) => {
@@ -64,11 +65,11 @@ impl BinarySearchTree for SimpleBinarySearchTree {
             let n = node.as_mut().unwrap();
 
             if n.borrow_mut().left.is_none() {
-                let right = std::mem::replace(&mut n.borrow_mut().right, None);
-                std::mem::replace(node, right);
+                let right = n.borrow_mut().right.take();
+                let _ = std::mem::replace(node, right);
             } else if n.borrow_mut().right.is_none() {
-                let left = std::mem::replace(&mut n.borrow_mut().left, None);
-                std::mem::replace(node, left);
+                let left = n.borrow_mut().left.take();
+                let _ = std::mem::replace(node, left);
             } else {
                 let i = n.borrow().left.as_ref().unwrap().borrow().val;
                 n.borrow_mut().val = i;
@@ -118,17 +119,17 @@ fn main() {
     tree.add(2).unwrap();
     tree.add(1).unwrap();
     tree.add(3).unwrap();
-    assert_eq!(true, tree.find(2));
+    assert!(tree.find(2));
 
     dbg!(&tree);
 
     tree.remove(2);
     dbg!(&tree);
-    assert_eq!(false, tree.find(2));
+    assert!(!tree.find(2));
 
     tree.add(2);
     dbg!(&tree);
-    assert_eq!(true, tree.find(2));
+    assert!(tree.find(2));
 }
 
 #[cfg(test)]
@@ -168,28 +169,28 @@ mod tests {
     #[test]
     fn test() {
         let mut tree: Box<dyn BinarySearchTree> = Box::new(SimpleBinarySearchTree::new());
-        assert_eq!(false, tree.find(1));
-        assert_eq!(false, tree.find(2));
-        assert_eq!(false, tree.find(3));
-        assert_eq!(false, tree.find(0));
+        assert!(!tree.find(1));
+        assert!(!tree.find(2));
+        assert!(!tree.find(3));
+        assert!(!tree.find(0));
         tree.add(1).unwrap();
-        assert_eq!(true, tree.find(1));
+        assert!(tree.find(1));
         tree.add(2).unwrap();
-        assert_eq!(true, tree.find(2));
+        assert!(tree.find(2));
         tree.add(3).unwrap();
-        assert_eq!(true, tree.find(3));
+        assert!(tree.find(3));
 
-        assert_eq!(true, tree.find(1));
-        assert_eq!(true, tree.find(2));
-        assert_eq!(true, tree.find(3));
+        assert!(tree.find(1));
+        assert!(tree.find(2));
+        assert!(tree.find(3));
 
         tree.remove(1);
-        assert_eq!(false, tree.find(1));
+        assert!(!tree.find(1));
         tree.remove(2);
-        assert_eq!(false, tree.find(2));
+        assert!(!tree.find(2));
         tree.remove(3);
-        assert_eq!(false, tree.find(3));
+        assert!(!tree.find(3));
 
-        assert_eq!(false, tree.find(0));
+        assert!(!tree.find(0));
     }
 }

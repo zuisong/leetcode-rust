@@ -78,8 +78,8 @@ impl Solution {
         let mut dp = vec![vec![false; lp + 1]; ls + 1];
         dp[0][0] = true;
 
-        for i in 0..p.len() {
-            if p[i] == b'*' {
+        for (i, item) in p.iter().enumerate() {
+            if *item == b'*' {
                 dp[0][i + 1] = dp[0][i];
             } else {
                 break;

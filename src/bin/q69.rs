@@ -61,7 +61,7 @@ impl Solution {
 }
 
 fn main() {
-    vec![80, 82, 1, 0, 5, 10, 2147395599].iter().for_each(|it| {
+    [80, 82, 1, 0, 5, 10, 2147395599].iter().for_each(|it| {
         assert_eq!(f64::sqrt(*it as f64) as i32, Solution::my_sqrt(*it));
     });
 }

@@ -55,15 +55,12 @@ impl Solution {
 
                 Some(n) => {
                     let node = n.borrow();
-                    match (&node.left, &node.right, &node.val) {
-                        (None, None, &v) => {
-                            if v == sum {
-                                return Some(vec![vec![sum]]);
-                            } else {
-                                return None;
-                            }
+                    if let (None, None, &v) = (&node.left, &node.right, &node.val) {
+                        if v == sum {
+                            return Some(vec![vec![sum]]);
+                        } else {
+                            return None;
                         }
-                        _ => {}
                     }
 
                     let l_res = path_sum(&node.left, sum - node.val);
@@ -93,7 +90,7 @@ impl Solution {
                 v.iter_mut().for_each(|t| t.reverse());
                 v
             })
-            .unwrap_or(vec![])
+            .unwrap_or_default()
     }
 }
 

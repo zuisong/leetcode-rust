@@ -37,27 +37,26 @@ impl SimpleBinarySearchTree {
 
 impl BinarySearchTree for SimpleBinarySearchTree {
     fn add(&mut self, item: i32) -> Result<(), &str> {
-        let mut node: &mut _ = &mut self.root;
-
-        loop {
+        fn add_helper(
+            node: &mut Option<Rc<RefCell<TreeNode>>>,
+            item: i32,
+        ) -> Result<(), &'static str> {
             match node {
                 None => {
-                    let _ =
-                        std::mem::replace(node, Some(Rc::new(RefCell::new(TreeNode::new(item)))));
+                    let _ = node.replace(Rc::new(RefCell::new(TreeNode::new(item))));
                     return Ok(());
                 }
                 Some(n) => {
                     let ordering = n.borrow().val.cmp(&item);
-                    node = match ordering {
-                        Ordering::Less => unsafe { &mut (*n.as_ptr()).right },
-                        Ordering::Greater => unsafe { &mut (*n.as_ptr()).left },
-                        Ordering::Equal => {
-                            return Err("不能插入一样的值2");
-                        }
-                    }
+                    return match ordering {
+                        Ordering::Less => add_helper(&mut n.clone().borrow_mut().right, item),
+                        Ordering::Greater => add_helper(&mut n.clone().borrow_mut().left, item),
+                        Ordering::Equal => Err("不能插入一样的值2"),
+                    };
                 }
             }
         }
+        return add_helper(&mut self.root, item);
     }
 
     fn remove(&mut self, item: i32) -> bool {

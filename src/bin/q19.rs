@@ -48,23 +48,32 @@ impl ListNode {
 impl Solution {
     pub fn remove_nth_from_end(head: Option<Box<ListNode>>, n: i32) -> Option<Box<ListNode>> {
         let mut head = head;
-        let mut ptr = &mut head as *mut Option<Box<ListNode>>;
-
-        let mut pt1 = &head;
-        // 第一个指针先往前走N步
-        for _ in 0..n {
-            pt1 = &pt1.as_ref().unwrap().next;
-        }
-        // 第二个指针开始走, 两个都每次走一步,
-        // 第一个指针走到最底下的时候, 第二个指针所在的节点就是要删掉的节点
-        while pt1.is_some() {
-            pt1 = &pt1.as_ref().unwrap().next;
-            if let Some(n) = unsafe { &mut (*ptr) } {
-                ptr = &mut n.next as *mut Option<Box<ListNode>>
+        let mut len = 0;
+        {
+            let mut pt1 = &head;
+            while let Some(p) = pt1 {
+                len += 1;
+                pt1 = &p.next;
             }
         }
 
-        unsafe { core::ptr::swap(ptr, &mut (*ptr).take().unwrap().next) }
+        if n == len {
+            return head.unwrap().next;
+        }
+
+        {
+            let mut pt1 = &mut head;
+            for _ in 0..(len - n) {
+                let Some(p) = pt1 else {
+                    unreachable!("pt1 should not be None")
+                };
+
+                pt1 = &mut p.next;
+            }
+            let n = pt1;
+            let n_next = { n.as_mut().unwrap().next.take() };
+            n.replace(n_next.unwrap());
+        }
 
         head
     }
